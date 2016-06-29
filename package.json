@@ -1,0 +1,71 @@
+{
+  "name": "showcar-pictures",
+  "version": "1.0.0",
+  "description": "A simple gallery component that works hand in hand with the showcar-carousel",
+  "main": "dist/showcar-pictures.min.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node ./example/server.js",
+    "prebuild": "npm run build:clean",
+    "build:js": "npm run build:babel && npm run build:uglify",
+    "build:babel": "mkdir dist && babel $npm_package_config_src.js -o $npm_package_config_dist.js -s",
+    "build:uglify": "uglifyjs $npm_package_config_dist.js --o $npm_package_config_dist.min.js --source-map dist/showcar-pictures.min.js.map -p 5 -c -m",
+    "build:css": "npm run build:sass && npm run build:autoprefixer && npm run build:cleancss",
+    "build:sass": "node-sass ./src/ -o ./dist/",
+    "build:autoprefixer": "node ./node_modules/postcss-cli/bin/postcss --use autoprefixer $npm_package_config_dist.css -d dist/",
+    "build:cleancss": "cleancss --source-map -o $npm_package_config_dist.min.css $npm_package_config_dist.css",
+    "build": "npm run build:js && npm run build:css",
+    "build:clean": "rimraf dist",
+    "postbuild": "echo 'Build succeeded!'",
+    "prod": "npm run build",
+    "watch:server": "nodemon --ignore dist --ignore src --ignore node_modules ./example/server.js",
+    "watch:sass": "node-sass -w ./src/ -o ./dist/",
+    "watch:babel": "babel $npm_package_config_src.js -w -o $npm_package_config_dist.js -s",
+    "watch:browser": "livereload",
+    "prewatch": "echo 'Starting watchers'",
+    "watch": "npm run watch:sass & npm run watch:babel & npm run watch:server & npm run watch:browser",
+    "dev": "npm run watch",
+    "version:major": "npm version major",
+    "version:minor": "npm version minor",
+    "version:patch": "npm version patch",
+    "prepush": "echo 'Pushing code to GitHub'",
+    "push": "git push --tags origin HEAD:master",
+    "deploy": "npm run build -s && npm run version:patch && npm run push"
+  },
+  "config": {
+    "dist": "./dist/showcar-pictures",
+    "src": "./src/showcar-pictures"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AutoScout24/showcar-pictures.git"
+  },
+  "keywords": [
+    "carousel",
+    "pictures",
+    "ui"
+  ],
+  "author": "Gerbrand van Dantzig @autoscout24",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AutoScout24/showcar-pictures/issues"
+  },
+  "homepage": "https://github.com/AutoScout24/showcar-pictures#readme",
+  "dependencies": {
+    "showcar-carousel": "^2.0.6"
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "babel-cli": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "clean-css": "^3.4.17",
+    "ejs": "^2.4.2",
+    "express": "^4.13.4",
+    "livereload": "^0.4.1",
+    "node-sass": "^3.7.0",
+    "postcss-cli": "^2.5.2",
+    "rimraf": "^2.5.2",
+    "showcar-ui": "git+https://gitlab.com/web-experience/showcar-ui.git",
+    "uglify-js": "^2.6.2"
+  }
+}
