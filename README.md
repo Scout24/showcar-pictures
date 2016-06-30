@@ -53,13 +53,13 @@ See the following example below:
     <as24-carousel class="as24-pictures-thumbnails" 
                    gap="0">
   
-      <li class="as24-carousel-item">
+      <div class="as24-carousel-item">
         <div class="as24-carousel-image-container">
           <img data-src="http://placehold.it/100x75?text=1"
                src=""
                alt="">
         </div>
-      </li>
+      </div>
       ...
   
     </as24-carousel>
