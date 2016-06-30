@@ -95,10 +95,11 @@ var Pictures = function () {
     this.element = element;
     this.resizeListener = null;
     this.thumbnailsVisible = false;
+    this.fullScreenState = false;
   }
 
   /**
-   * Adds all handlers for the thumbnails carousel
+   * Adds all handlers for the thumbnails carousel.
    */
 
 
@@ -119,7 +120,7 @@ var Pictures = function () {
     }
 
     /**
-     * Adds all handlers for the slider carousel
+     * Adds all handlers for the slider carousel.
      */
 
   }, {
@@ -140,36 +141,49 @@ var Pictures = function () {
     }
 
     /**
-     * Adds all handlers for full screen view
+     * Set the full screen state.
+     * @param {Boolean} state - the full screen state.
      */
 
   }, {
-    key: 'addFullScreen',
-    value: function addFullScreen() {
-      var _this3 = this;
+    key: 'setFullScreenState',
+    value: function setFullScreenState(state) {
+      if (this.fullScreenState === state) return;
+      this.fullScreenState = state;
+      var index = parseInt(this.slider.getIndex());
+      if (this.fullScreenState) {
+        addClass('fullScreen', this.element);
+      } else {
+        removeClass('fullScreen', this.element);
+      }
 
-      this.fullScreen.addEventListener('click', function (e) {
-        var index = parseInt(_this3.slider.getIndex());
-        e.preventDefault();
+      this.slider.setAttribute('preview', String(!this.fullScreenState));
+      this.setThumbnailMouseListeners(!this.fullScreenState);
 
-        toggleClass('fullScreen', _this3.element);
-        var isFullScreen = containsClass('fullScreen', _this3.element);
-        _this3.slider.setAttribute('preview', String(!isFullScreen));
-        _this3.setThumbnailMouseListeners(!isFullScreen);
-
-        [].forEach.call(_this3.container, function (element) {
-          return addClass('no-transition', element);
-        });
-        _this3.slider.redraw();
-        _this3.slider.goTo(index);
-        _this3.thumbnails.redraw();
-        _this3.thumbnails.goTo(index);
-        [].forEach.call(_this3.container, function (element) {
-          return removeClass('no-transition', element);
-        });
-
-        _this3.redraw();
+      [].forEach.call(this.container, function (element) {
+        return addClass('no-transition', element);
       });
+      this.slider.redraw();
+      this.slider.goTo(index);
+      this.thumbnails.redraw();
+      this.thumbnails.goTo(index);
+      [].forEach.call(this.container, function (element) {
+        return removeClass('no-transition', element);
+      });
+
+      this.redraw();
+    }
+
+    /**
+     * Adds all handlers for full screen view.
+     * {Event} event - the click event.
+     */
+
+  }, {
+    key: 'fullScreenButtonHandler',
+    value: function fullScreenButtonHandler(event) {
+      event.preventDefault();
+      this.setFullScreenState(!this.fullScreenState);
     }
 
     /**
@@ -191,7 +205,10 @@ var Pictures = function () {
 
       // FullScreen
       this.fullScreen = this.element.querySelector('.as24-pictures-fullScreen');
-      if (this.fullScreen) this.addFullScreen();
+      if (this.fullScreen) {
+        this.fullScreenButtonListener = this.fullScreenButtonHandler.bind(this);
+        this.fullScreen.addEventListener('click', this.fullScreenButtonListener);
+      }
 
       this.resizeListener = this.resizeTimeoutHandler.bind(this);
 
@@ -203,7 +220,7 @@ var Pictures = function () {
     }
 
     /**
-     * Cleans up the pictures.
+     * Cleans up the pictures component by removing listeners and dom elements.
      */
 
   }, {
@@ -211,10 +228,18 @@ var Pictures = function () {
     value: function detached() {
       window.removeEventListener('resize', this.resizeListener, true);
       this.setThumbnailMouseListeners(false);
+
+      this.fullScreen = this.element.querySelector('.as24-pictures-fullScreen');
+      if (this.fullScreen) {
+        this.fullScreen.removeEventListener('click', this.fullScreenButtonListener);
+      }
+
+      this.removeContainer();
     }
 
     /**
      * Add or remove thumbnail mouse listeners
+     * @param {Boolean} state - the state of the listeners
      */
 
   }, {
@@ -240,7 +265,7 @@ var Pictures = function () {
   }, {
     key: 'addContainer',
     value: function addContainer() {
-      var _this4 = this;
+      var _this3 = this;
 
       if (containsClass('as24-pictures-wrapper', this.element.firstChild)) {
         this.wrapper = this.element.querySelector('.as24-pictures-wrapper');
@@ -256,23 +281,28 @@ var Pictures = function () {
 
       [].forEach.call(this.element.children, function (element) {
         var item = element.cloneNode(true);
-        _this4.container.appendChild(item);
+        _this3.container.appendChild(item);
       });
 
       this.wrapper.appendChild(this.container);
       this.element.innerHTML = '';
       this.element.appendChild(this.wrapper);
+    }
 
-      // let fragment = document.createDocumentFragment();
-      // let container = addClass('as24-pictures-container', document.createElement('div'));
-      //
-      // while(this.element.firstChild) {
-      //   fragment.appendChild(this.element.firstChild.cloneNode(true));
-      //   this.element.removeChild(this.element.firstChild);
-      // }
-      // container.appendChild(fragment);
-      // this.element.appendChild(container);
-      // this.container = this.element.firstChild;
+    /**
+     * Removes the container.
+     */
+
+  }, {
+    key: 'removeContainer',
+    value: function removeContainer() {
+      var _this4 = this;
+
+      [].forEach.call(this.container.children, function (element) {
+        _this4.container.removeChild(element);
+      });
+      this.wrapper.removeChild(this.container);
+      this.element.removeChild(this.wrapper);
     }
 
     /**
@@ -304,6 +334,7 @@ var Pictures = function () {
 
     /**
      * Animates the thumbnail view position according its state.
+     * {Boolean} state - the thumbnail component visibility state.
      */
 
   }, {
@@ -354,7 +385,6 @@ var Pictures = function () {
     /**
      * Moves the element by the given distance.
      * @param {Object} options - the values for moving an element.
-     * @param {HTMLElement} element.
      */
 
   }, {

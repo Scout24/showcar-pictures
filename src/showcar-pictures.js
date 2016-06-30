@@ -82,10 +82,11 @@ class Pictures {
     this.element = element;
     this.resizeListener = null;
     this.thumbnailsVisible = false;
+    this.fullScreenState = false;
   }
 
   /**
-   * Adds all handlers for the thumbnails carousel
+   * Adds all handlers for the thumbnails carousel.
    */
   addThumbnails() {
     this.thumbnailsItems = this.thumbnails.querySelectorAll('.as24-carousel-item');
@@ -100,7 +101,7 @@ class Pictures {
   }
 
   /**
-   * Adds all handlers for the slider carousel
+   * Adds all handlers for the slider carousel.
    */
   addSlider() {
     this.slider.addEventListener('slide', (e) => {
@@ -113,28 +114,41 @@ class Pictures {
     });
   }
 
+
   /**
-   * Adds all handlers for full screen view
+   * Set the full screen state.
+   * @param {Boolean} state - the full screen state.
    */
-  addFullScreen() {
-    this.fullScreen.addEventListener('click', e => {
-      let index = parseInt(this.slider.getIndex());
-      e.preventDefault();
+  setFullScreenState(state){
+    if(this.fullScreenState === state) return;
+    this.fullScreenState = state;
+    let index = parseInt(this.slider.getIndex());
+    if(this.fullScreenState){
+      addClass('fullScreen', this.element);
+    } else {
+      removeClass('fullScreen', this.element);
+    }
 
-      toggleClass('fullScreen', this.element);
-      let isFullScreen = containsClass('fullScreen', this.element);
-      this.slider.setAttribute('preview',String(!isFullScreen));
-      this.setThumbnailMouseListeners(!isFullScreen);
+    this.slider.setAttribute('preview',String(!this.fullScreenState));
+    this.setThumbnailMouseListeners(!this.fullScreenState);
 
-      [].forEach.call(this.container, element => addClass('no-transition', element));
-      this.slider.redraw();
-      this.slider.goTo(index);
-      this.thumbnails.redraw();
-      this.thumbnails.goTo(index);
-      [].forEach.call(this.container, element => removeClass('no-transition', element));
+    [].forEach.call(this.container, element => addClass('no-transition', element));
+    this.slider.redraw();
+    this.slider.goTo(index);
+    this.thumbnails.redraw();
+    this.thumbnails.goTo(index);
+    [].forEach.call(this.container, element => removeClass('no-transition', element));
 
-      this.redraw();
-    });
+    this.redraw();
+  }
+
+  /**
+   * Adds all handlers for full screen view.
+   * {Event} event - the click event.
+   */
+  fullScreenButtonHandler(event) {
+    event.preventDefault();
+    this.setFullScreenState(!this.fullScreenState);
   }
 
   /**
@@ -153,7 +167,10 @@ class Pictures {
 
     // FullScreen
     this.fullScreen = this.element.querySelector('.as24-pictures-fullScreen');
-    if(this.fullScreen) this.addFullScreen();
+    if(this.fullScreen) {
+      this.fullScreenButtonListener = this.fullScreenButtonHandler.bind(this);
+      this.fullScreen.addEventListener('click', this.fullScreenButtonListener);
+    }
 
     this.resizeListener = this.resizeTimeoutHandler.bind(this);
 
@@ -165,15 +182,23 @@ class Pictures {
   }
 
   /**
-   * Cleans up the pictures.
+   * Cleans up the pictures component by removing listeners and dom elements.
    */
   detached(){
     window.removeEventListener('resize', this.resizeListener, true);
     this.setThumbnailMouseListeners(false);
+
+    this.fullScreen = this.element.querySelector('.as24-pictures-fullScreen');
+    if(this.fullScreen) {
+      this.fullScreen.removeEventListener('click', this.fullScreenButtonListener);
+    }
+
+    this.removeContainer();
   }
 
   /**
    * Add or remove thumbnail mouse listeners
+   * @param {Boolean} state - the state of the listeners
    */
   setThumbnailMouseListeners(state){
     if(state){
@@ -214,19 +239,17 @@ class Pictures {
     this.wrapper.appendChild(this.container);
     this.element.innerHTML = '';
     this.element.appendChild(this.wrapper);
+  }
 
-
-
-    // let fragment = document.createDocumentFragment();
-    // let container = addClass('as24-pictures-container', document.createElement('div'));
-    //
-    // while(this.element.firstChild) {
-    //   fragment.appendChild(this.element.firstChild.cloneNode(true));
-    //   this.element.removeChild(this.element.firstChild);
-    // }
-    // container.appendChild(fragment);
-    // this.element.appendChild(container);
-    // this.container = this.element.firstChild;
+  /**
+   * Removes the container.
+   */
+  removeContainer() {
+    [].forEach.call(this.container.children, element => {
+      this.container.removeChild(element);
+    });
+    this.wrapper.removeChild(this.container);
+    this.element.removeChild(this.wrapper);
   }
 
   /**
@@ -254,6 +277,7 @@ class Pictures {
 
   /**
    * Animates the thumbnail view position according its state.
+   * {Boolean} state - the thumbnail component visibility state.
    */
   setThumbnailVisibility(state = false){
     if(this.thumbnailsVisible === state) return;
@@ -296,7 +320,6 @@ class Pictures {
   /**
    * Moves the element by the given distance.
    * @param {Object} options - the values for moving an element.
-   * @param {HTMLElement} element.
    */
   move(options = {element: this.element, x: 0, y: 0}){
     let {element: element = this.element, x: x = 0, y: y = 0} = options;
