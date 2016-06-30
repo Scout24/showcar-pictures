@@ -31,30 +31,31 @@ See the following example below:
 
 <as24-pictures>
 
+    <!-- Gallery big slider images -->
     <as24-carousel class="as24-pictures-slider" 
                    mode="slider"
                    gap="0"
                    preview="true"
                    indicator="true">
                      
-      <li class="as24-carousel-item">
+      <div class="as24-carousel-item">
         <div class="as24-carousel-image-container">
-          <img data-src="http://placehold.it/400x300?text=1,400x300"
+          <img data-src="http://placehold.it/640x480?text=1"
                src=""
                alt="">
         </div>
-      <li>
+      <div>
       ...
   
     </as24-carousel>
   
-    <!-- Optional -->
+    <!-- Gallery thumbnails images -->
     <as24-carousel class="as24-pictures-thumbnails" 
                    gap="0">
   
       <li class="as24-carousel-item">
         <div class="as24-carousel-image-container">
-          <img data-src="http://placehold.it/80x60?text=1,80x60"
+          <img data-src="http://placehold.it/100x75?text=1"
                src=""
                alt="">
         </div>
@@ -62,10 +63,10 @@ See the following example below:
       ...
   
     </as24-carousel>
-    <!-- Optional -->
 
 </as24-pictures>
 ```
+*Note: The thumbnail images must have the same quantity as the slider images*
 
 #### CSS Styling 
 
