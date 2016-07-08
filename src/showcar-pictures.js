@@ -257,13 +257,10 @@ class Pictures {
    */
   mouseMoveHandler(event){
     let sliderSize = this.getElementSize(this.slider);
-    let tolerance = 60;
-    let thumbnailsHeight = this.thumbnails.offsetHeight + tolerance;
-    if(event.clientY >= sliderSize.height - thumbnailsHeight &&
-       event.clientY <= sliderSize.height){
+
+    if(event.clientY <= sliderSize.height){
       this.setThumbnailVisibility(true);
-    } else if(event.clientY < sliderSize.height - thumbnailsHeight &&
-              event.clientY >= 0) {
+    } else if(event.clientY > sliderSize.height) {
       this.setThumbnailVisibility(false);
     }
   }

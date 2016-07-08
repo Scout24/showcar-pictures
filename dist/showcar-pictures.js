@@ -313,11 +313,12 @@ var Pictures = function () {
     key: 'mouseMoveHandler',
     value: function mouseMoveHandler(event) {
       var sliderSize = this.getElementSize(this.slider);
-      var tolerance = 60;
-      var thumbnailsHeight = this.thumbnails.offsetHeight + tolerance;
-      if (event.clientY >= sliderSize.height - thumbnailsHeight && event.clientY <= sliderSize.height) {
+      //let tolerance = 60;
+      //let thumbnailsHeight = this.thumbnails.offsetHeight + tolerance;
+
+      if (event.clientY <= sliderSize.height) {
         this.setThumbnailVisibility(true);
-      } else if (event.clientY < sliderSize.height - thumbnailsHeight && event.clientY >= 0) {
+      } else if (event.clientY > sliderSize.height) {
         this.setThumbnailVisibility(false);
       }
     }
