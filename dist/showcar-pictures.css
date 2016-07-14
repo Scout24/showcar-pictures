@@ -22,18 +22,11 @@ as24-pictures {
     -moz-osx-font-smoothing: grayscale;
     bottom: 0;
     min-width: 40px;
-    -webkit-transition: -webkit-transform .4s;
-    transition: -webkit-transform .4s;
     transition: transform .4s;
-    transition: transform .4s, -webkit-transform .4s;
-    -webkit-perspective: 1000px;
-            perspective: 1000px;
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden; }
+    perspective: 1000px;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden; }
   as24-pictures as24-carousel.as24-pictures-slider .as24-pagination-button {
-    -webkit-transition: background-color .3s, opacity .3s, height .3s, top .3s, margin-top .3s;
     transition: background-color .3s, opacity .3s, height .3s, top .3s, margin-top .3s; }
   as24-pictures as24-carousel.as24-pictures-thumbnails {
     position: absolute;
@@ -42,16 +35,10 @@ as24-pictures {
     padding: 7px 7px;
     width: 100%;
     background: rgba(0, 0, 0, 0.5);
-    -webkit-transition: -webkit-transform .4s;
-    transition: -webkit-transform .4s;
     transition: transform .4s;
-    transition: transform .4s, -webkit-transform .4s;
-    -webkit-perspective: 1000px;
-            perspective: 1000px;
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden; }
+    perspective: 1000px;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden; }
     as24-pictures as24-carousel.as24-pictures-thumbnails .as24-pagination {
       width: 35px;
       height: 75px;
@@ -83,7 +70,6 @@ as24-pictures {
         width: 100%;
         height: 100%;
         border: 0px solid black;
-        -webkit-transition: border .3s;
         transition: border .3s; }
       as24-pictures as24-carousel.as24-pictures-thumbnails .as24-carousel-item.active:after {
         border: 4px solid black; }
@@ -107,12 +93,12 @@ as24-pictures {
       width: calc(100% - 200px);
       float: left; }
       as24-pictures.fullScreen as24-carousel.as24-pictures-thumbnails {
+        text-align: center;
         position: relative;
         background: rgba(0, 0, 0, 0.5); }
     as24-pictures.fullScreen .fullScreen-show {
       display: block; }
     as24-pictures.fullScreen .as24-carousel-container.no-transition {
-      -webkit-transition: none;
       transition: none; }
     as24-pictures.fullScreen .as24-pictures-wrapper {
       position: absolute;
@@ -121,16 +107,14 @@ as24-pictures {
       height: 100%;
       max-width: 1024px;
       left: 50%;
-      -webkit-transform: translate(-50%, 0);
-              transform: translate(-50%, 0);
+      transform: translate(-50%, 0);
       background: black; }
     as24-pictures.fullScreen .as24-pictures-container {
       overflow: hidden;
       position: relative;
       width: 100%;
       top: 50%;
-      -webkit-transform: translate(0, -50%);
-              transform: translate(0, -50%); }
+      transform: translate(0, -50%); }
     as24-pictures.fullScreen .as24-pictures-header {
       margin-bottom: 20px; }
     as24-pictures.fullScreen .as24-pictures-ad {
