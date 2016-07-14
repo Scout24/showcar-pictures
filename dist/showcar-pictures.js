@@ -180,10 +180,23 @@ var Pictures = function () {
      */
 
   }, {
-    key: 'fullScreenButtonHandler',
-    value: function fullScreenButtonHandler(event) {
+    key: 'fullScreenOpenHandler',
+    value: function fullScreenOpenHandler(event) {
       event.preventDefault();
-      this.setFullScreenState(!this.fullScreenState);
+      var target = event.target || event.srcElement;
+      if (!this.fullScreenState && target.nodeName.toLowerCase() === 'img') {
+        this.setFullScreenState(true);
+      }
+    }
+  }, {
+    key: 'fullScreenCloseHandler',
+    value: function fullScreenCloseHandler(event) {
+      event.preventDefault();
+      var target = event.target || event.srcElement;
+      var targetNodeName = target.nodeName.toLowerCase();
+      if (this.fullScreenState && targetNodeName === 'as24-pictures') {
+        this.setFullScreenState(false);
+      }
     }
 
     /**
@@ -204,11 +217,14 @@ var Pictures = function () {
       if (this.thumbnails) this.addThumbnails();
 
       // FullScreen
-      this.fullScreen = this.element.querySelector('.as24-pictures-fullScreen');
+      this.fullScreen = this.element.querySelector('as24-pictures as24-carousel');
       if (this.fullScreen) {
-        this.fullScreenButtonListener = this.fullScreenButtonHandler.bind(this);
-        this.fullScreen.addEventListener('click', this.fullScreenButtonListener);
+        this.fullScreenOpenListener = this.fullScreenOpenHandler.bind(this);
+        this.fullScreen.addEventListener('click', this.fullScreenOpenListener);
       }
+
+      this.fullScreenCloseListener = this.fullScreenCloseHandler.bind(this);
+      this.element.addEventListener('click', this.fullScreenCloseListener);
 
       this.resizeListener = this.resizeTimeoutHandler.bind(this);
 
@@ -229,10 +245,12 @@ var Pictures = function () {
       window.removeEventListener('resize', this.resizeListener, true);
       this.setThumbnailMouseListeners(false);
 
-      this.fullScreen = this.element.querySelector('.as24-pictures-fullScreen');
+      this.fullScreen = this.element.querySelector('as24-pictures as24-carousel');
       if (this.fullScreen) {
-        this.fullScreen.removeEventListener('click', this.fullScreenButtonListener);
+        this.fullScreen.removeEventListener('click', this.fullScreenOpenListener);
       }
+
+      this.element.removeEventListener('click', this.fullScreenCloseListener);
 
       this.removeContainer();
     }
@@ -313,8 +331,6 @@ var Pictures = function () {
     key: 'mouseMoveHandler',
     value: function mouseMoveHandler(event) {
       var sliderSize = this.getElementSize(this.slider);
-      //let tolerance = 60;
-      //let thumbnailsHeight = this.thumbnails.offsetHeight + tolerance;
 
       if (event.clientY <= sliderSize.height) {
         this.setThumbnailVisibility(true);

@@ -146,11 +146,23 @@ class Pictures {
    * Adds all handlers for full screen view.
    * {Event} event - the click event.
    */
-  fullScreenButtonHandler(event) {
+  fullScreenOpenHandler(event) {
     event.preventDefault();
-    this.setFullScreenState(!this.fullScreenState);
+    const target = event.target || event.srcElement;
+    if(!this.fullScreenState && target.nodeName.toLowerCase() === 'img') {
+      this.setFullScreenState(true);
+    }
   }
 
+  fullScreenCloseHandler(event) {
+    event.preventDefault();
+    const target = event.target || event.srcElement;
+    const targetNodeName = target.nodeName.toLowerCase();
+    if(this.fullScreenState && targetNodeName === 'as24-pictures') {
+      this.setFullScreenState(false);
+    }
+  }
+  
   /**
    * Initializes the pictures by adding all necessary bits and bolts.
    */
@@ -166,11 +178,14 @@ class Pictures {
     if(this.thumbnails) this.addThumbnails();
 
     // FullScreen
-    this.fullScreen = this.element.querySelector('.as24-pictures-fullScreen');
+    this.fullScreen = this.element.querySelector('as24-pictures as24-carousel');
     if(this.fullScreen) {
-      this.fullScreenButtonListener = this.fullScreenButtonHandler.bind(this);
-      this.fullScreen.addEventListener('click', this.fullScreenButtonListener);
+      this.fullScreenOpenListener = this.fullScreenOpenHandler.bind(this);
+      this.fullScreen.addEventListener('click', this.fullScreenOpenListener);
     }
+
+    this.fullScreenCloseListener = this.fullScreenCloseHandler.bind(this);
+    this.element.addEventListener('click', this.fullScreenCloseListener);
 
     this.resizeListener = this.resizeTimeoutHandler.bind(this);
 
@@ -188,10 +203,12 @@ class Pictures {
     window.removeEventListener('resize', this.resizeListener, true);
     this.setThumbnailMouseListeners(false);
 
-    this.fullScreen = this.element.querySelector('.as24-pictures-fullScreen');
+    this.fullScreen = this.element.querySelector('as24-pictures as24-carousel');
     if(this.fullScreen) {
-      this.fullScreen.removeEventListener('click', this.fullScreenButtonListener);
+      this.fullScreen.removeEventListener('click', this.fullScreenOpenListener);
     }
+
+    this.element.removeEventListener('click', this.fullScreenCloseListener);
 
     this.removeContainer();
   }
