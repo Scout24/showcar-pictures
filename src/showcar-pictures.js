@@ -157,12 +157,14 @@ class Pictures {
   fullScreenCloseHandler(event) {
     event.preventDefault();
     const target = event.target || event.srcElement;
-    const targetNodeName = target.nodeName.toLowerCase();
-    if(this.fullScreenState && targetNodeName === 'as24-pictures') {
-      this.setFullScreenState(false);
+
+    if(this.fullScreenState) {
+      if(target.nodeName.toLowerCase() === 'as24-pictures' || target.classList.contains('as24-pictures-fullScreen-close')) {
+        this.setFullScreenState(false);
+      }
     }
   }
-  
+
   /**
    * Initializes the pictures by adding all necessary bits and bolts.
    */
@@ -187,6 +189,11 @@ class Pictures {
     this.fullScreenCloseListener = this.fullScreenCloseHandler.bind(this);
     this.element.addEventListener('click', this.fullScreenCloseListener);
 
+    this.closeButton = this.element.querySelector('as24-pictures-fullScreen-close');
+    if(this.closeButton) {
+      this.closeButton.addEventListener('click', this.fullScreenCloseListener);
+    }
+
     this.resizeListener = this.resizeTimeoutHandler.bind(this);
 
     // Add Listeners.
@@ -206,6 +213,11 @@ class Pictures {
     this.fullScreen = this.element.querySelector('as24-pictures as24-carousel');
     if(this.fullScreen) {
       this.fullScreen.removeEventListener('click', this.fullScreenOpenListener);
+    }
+
+    this.closeButton = this.element.querySelector('as24-pictures-fullScreen-close');
+    if(this.closeButton) {
+      this.closeButton.addEventListener('click', this.fullScreenCloseListener);
     }
 
     this.element.removeEventListener('click', this.fullScreenCloseListener);
