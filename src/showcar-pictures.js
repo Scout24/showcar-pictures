@@ -230,15 +230,16 @@ class Pictures {
    * @param {Boolean} state - the state of the listeners
    */
   setThumbnailMouseListeners(state){
+    this.slider = this.element.querySelector('.as24-pictures-slider');
     if(state){
       this.setThumbnailMouseListeners(false);
-      this.mouseMoveListener = this.mouseMoveHandler.bind(this);
+      this.mouseEnterListener = this.mouseEnterHandler.bind(this);
       this.mouseLeaveListener = this.mouseLeaveHandler.bind(this);
-      this.element.addEventListener('mousemove', this.mouseMoveListener, true);
-      this.element.addEventListener('mouseleave', this.mouseLeaveListener, true);
+      this.slider.addEventListener('mouseover', this.mouseEnterListener, true);
+      this.slider.addEventListener('mouseleave', this.mouseLeaveListener, true);
     } else {
-      this.element.removeEventListener('mousemove', this.mouseMoveListener,  true);
-      this.element.removeEventListener('mouseleave', this.mouseLeaveListener, true);
+      this.slider.removeEventListener('mouseover', this.mouseEnterListener,  true);
+      this.slider.removeEventListener('mouseleave', this.mouseLeaveListener, true);
       this.setThumbnailVisibility(false);
     }
   }
@@ -284,14 +285,8 @@ class Pictures {
   /**
    * Mouse move handler for the thumbnail visibility state.
    */
-  mouseMoveHandler(event){
-    let sliderSize = this.getElementSize(this.slider);
-
-    if(event.clientY <= sliderSize.height){
-      this.setThumbnailVisibility(true);
-    } else if(event.clientY > sliderSize.height) {
-      this.setThumbnailVisibility(false);
-    }
+  mouseEnterHandler(event){
+    this.setThumbnailVisibility(true);
   }
 
   /**
