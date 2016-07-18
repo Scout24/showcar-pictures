@@ -230,7 +230,7 @@ class Pictures {
    * @param {Boolean} state - the state of the listeners
    */
   setThumbnailMouseListeners(state){
-    this.slider = this.element.querySelector('.as24-pictures-slider');
+    this.slider = this.element.querySelector('.as24-pictures-container');
     if(state){
       this.setThumbnailMouseListeners(false);
       this.mouseEnterListener = this.mouseEnterHandler.bind(this);

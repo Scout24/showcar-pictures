@@ -275,7 +275,7 @@ var Pictures = function () {
   }, {
     key: 'setThumbnailMouseListeners',
     value: function setThumbnailMouseListeners(state) {
-      this.slider = this.element.querySelector('.as24-pictures-slider');
+      this.slider = this.element.querySelector('.as24-pictures-container');
       if (state) {
         this.setThumbnailMouseListeners(false);
         this.mouseEnterListener = this.mouseEnterHandler.bind(this);
