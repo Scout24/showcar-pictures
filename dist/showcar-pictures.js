@@ -214,23 +214,25 @@ var Pictures = function () {
       this.slider = this.element.querySelector('.as24-pictures-slider');
       if (this.slider) this.addSlider();
 
-      // Thumbnails
-      this.thumbnails = this.element.querySelector('.as24-pictures-thumbnails');
-      if (this.thumbnails) this.addThumbnails();
+      if (window.innerWidth > 1023) {
+        // Thumbnails
+        this.thumbnails = this.element.querySelector('.as24-pictures-thumbnails');
+        if (this.thumbnails) this.addThumbnails();
 
-      // FullScreen
-      this.fullScreen = this.element.querySelector('as24-pictures as24-carousel');
-      if (this.fullScreen) {
-        this.fullScreenOpenListener = this.fullScreenOpenHandler.bind(this);
-        this.fullScreen.addEventListener('click', this.fullScreenOpenListener);
-      }
+        // FullScreen
+        this.fullScreen = this.element.querySelector('as24-pictures as24-carousel');
+        if (this.fullScreen) {
+          this.fullScreenOpenListener = this.fullScreenOpenHandler.bind(this);
+          this.fullScreen.addEventListener('click', this.fullScreenOpenListener);
+        }
 
-      this.fullScreenCloseListener = this.fullScreenCloseHandler.bind(this);
-      this.element.addEventListener('click', this.fullScreenCloseListener);
+        this.fullScreenCloseListener = this.fullScreenCloseHandler.bind(this);
+        this.element.addEventListener('click', this.fullScreenCloseListener);
 
-      this.closeButton = this.element.querySelector('as24-pictures-fullScreen-close');
-      if (this.closeButton) {
-        this.closeButton.addEventListener('click', this.fullScreenCloseListener);
+        this.closeButton = this.element.querySelector('as24-pictures-fullScreen-close');
+        if (this.closeButton) {
+          this.closeButton.addEventListener('click', this.fullScreenCloseListener);
+        }
       }
 
       this.resizeListener = this.resizeTimeoutHandler.bind(this);
