@@ -119,6 +119,8 @@ as24-pictures {
       transform: translate(0, -50%); }
     as24-pictures.fullScreen .as24-pictures-header {
       margin-bottom: 20px; }
+      as24-pictures.fullScreen .as24-pictures-header h2, as24-pictures.fullScreen .as24-pictures-header h3 {
+        color: white; }
     as24-pictures.fullScreen .as24-pictures-ad {
       display: block;
       width: 180px;
