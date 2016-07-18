@@ -67,6 +67,10 @@ as24-pictures {
       transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
 
+      .as24-carousel-wrapper {
+        overflow: visible;
+      }
+
       .as24-pagination {
         width: 35px;
         height: 75px;
@@ -102,16 +106,16 @@ as24-pictures {
         &:after {
           position: absolute;
           content: '';
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
+          top: -2px;
+          left: -2px;
+          width: calc(100% + 4px);
+          height: calc(100% + 4px);
           border: 0px solid black;
           transition: border .3s;
         }
 
         &.active:after {
-          border: 4px solid black;
+          border: 2px solid #ff7500;
         }
       }
 
