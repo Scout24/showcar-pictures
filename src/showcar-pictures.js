@@ -230,16 +230,16 @@ class Pictures {
    * @param {Boolean} state - the state of the listeners
    */
   setThumbnailMouseListeners(state){
-    this.slider = this.element.querySelector('.as24-pictures-container');
+    this.sliderContainer = this.element.querySelector('.as24-pictures-slider-container');
     if(state){
       this.setThumbnailMouseListeners(false);
       this.mouseEnterListener = this.mouseEnterHandler.bind(this);
       this.mouseLeaveListener = this.mouseLeaveHandler.bind(this);
-      this.slider.addEventListener('mouseover', this.mouseEnterListener, true);
-      this.slider.addEventListener('mouseleave', this.mouseLeaveListener, true);
+      this.sliderContainer.addEventListener('mouseover', this.mouseEnterListener, true);
+      this.sliderContainer.addEventListener('mouseleave', this.mouseLeaveListener, true);
     } else {
-      this.slider.removeEventListener('mouseover', this.mouseEnterListener,  true);
-      this.slider.removeEventListener('mouseleave', this.mouseLeaveListener, true);
+      this.sliderContainer.removeEventListener('mouseover', this.mouseEnterListener,  true);
+      this.sliderContainer.removeEventListener('mouseleave', this.mouseLeaveListener, true);
       this.setThumbnailVisibility(false);
     }
   }
