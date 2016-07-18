@@ -90,7 +90,8 @@ as24-pictures {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    max-width: none; }
+    max-width: none;
+    background-color: rgba(0, 0, 0, 0.9); }
     as24-pictures.fullScreen as24-carousel {
       width: calc(100% - 200px);
       float: left; }
@@ -109,8 +110,7 @@ as24-pictures {
       height: 100%;
       max-width: 1024px;
       left: 50%;
-      transform: translate(-50%, 0);
-      background: black; }
+      transform: translate(-50%, 0); }
     as24-pictures.fullScreen .as24-pictures-container {
       overflow: hidden;
       position: relative;
