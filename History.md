@@ -1,4 +1,14 @@
 
+1.0.4 / 2016-07-19
+==================
+
+  * Added handling for stopping video on slide change
+  * Cursor type pointer when hovering over gallery images.
+  * Added break for full screen mode(L view only)
+  * thumbnail border orange, thinner and out of thumb picture.
+  * Changed naming for slider div container to avoid conflicts
+  * Added additional container for gallery slider and thumbs to make hover events work smoothly
+
 1.0.3 / 2016-07-18
 ==================
 
