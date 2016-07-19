@@ -43,10 +43,10 @@ as24-pictures {
         -moz-osx-font-smoothing: grayscale;
         bottom: 0;
         min-width: 40px;
-
+        left: 50%;
         transition: transform .4s;
         perspective: 1000px;
-        transform: translate3d(0, 0, 0);
+        transform: translate(-50%, 0);
         backface-visibility: hidden;
       }
       .as24-pagination-button {
