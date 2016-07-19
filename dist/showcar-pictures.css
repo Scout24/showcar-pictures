@@ -19,7 +19,8 @@ as24-pictures {
   as24-pictures .fullScreen-show {
     display: none; }
   as24-pictures as24-carousel .as24-carousel-item {
-    border: none; }
+    border: none;
+    cursor: pointer; }
   as24-pictures as24-carousel.as24-pictures-slider .as24-pagination-indicator {
     text-rendering: geometricPrecision;
     -webkit-font-smoothing: antialiased;
