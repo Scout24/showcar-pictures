@@ -1,4 +1,9 @@
 
+1.0.6 / 2016-07-19
+==================
+
+  * Fullscreen view should be anchored on the top left side of the window
+
 1.0.5 / 2016-07-19
 ==================
 
