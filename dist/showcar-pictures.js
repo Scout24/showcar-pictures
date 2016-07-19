@@ -356,8 +356,8 @@ var Pictures = function () {
     key: 'mouseEnterHandler',
     value: function mouseEnterHandler(event) {
       var target = event.target || event.srcElement;
-
-      if (target.classList.contains('as24-pagination-button')) {
+      var paginationButtons = this.slider.querySelectorAll('.as24-pagination-button');
+      if (paginationButtons && (target == paginationButtons[0] || target == paginationButtons[1])) {
         event.stopPropagation();
         this.setThumbnailVisibility(false);
         return;
