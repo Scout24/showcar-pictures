@@ -1,4 +1,9 @@
 
+1.0.5 / 2016-07-19
+==================
+
+  * Don't show thumbs when cursor is over pagination buttons
+
 1.0.4 / 2016-07-19
 ==================
 
