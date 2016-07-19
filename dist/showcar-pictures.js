@@ -355,6 +355,13 @@ var Pictures = function () {
   }, {
     key: 'mouseEnterHandler',
     value: function mouseEnterHandler(event) {
+      var target = event.target || event.srcElement;
+
+      if (target.classList.contains('as24-pagination-button')) {
+        event.stopPropagation();
+        this.setThumbnailVisibility(false);
+        return;
+      }
       this.setThumbnailVisibility(true);
     }
 
