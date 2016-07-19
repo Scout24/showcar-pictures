@@ -325,7 +325,7 @@ class Pictures {
    * {Boolean} state - the thumbnail component visibility state.
    */
   setThumbnailVisibility(state = false){
-    if(this.thumbnailsVisible === state) return;
+    if(!this.thumbnails || this.thumbnailsVisible === state) return;
 
     this.thumbnailsVisible = state;
     let thumbnailHeight = this.thumbnails.offsetHeight;
