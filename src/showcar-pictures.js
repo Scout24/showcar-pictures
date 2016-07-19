@@ -173,7 +173,17 @@ class Pictures {
 
     // Slider
     this.slider = this.element.querySelector('.as24-pictures-slider');
-    if(this.slider) this.addSlider();
+    if(this.slider) {
+      this.addSlider();
+      if(this.element.querySelector('.video-container')) {
+        this.slider.addEventListener('slide', function(event) {
+          if(event.detail.index !== 0) {
+            var videoFrame = document.querySelector('as24-pictures .video-container iframe');
+            videoFrame.contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
+          }
+        });
+      }
+    }
 
     if(window.innerWidth > 1023) {
       // Thumbnails
