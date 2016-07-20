@@ -52,7 +52,7 @@
   },
   "homepage": "https://github.com/AutoScout24/showcar-pictures#readme",
   "dependencies": {
-    "showcar-carousel": "^2.1.7"
+    "showcar-carousel": "^2.1.8"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",
