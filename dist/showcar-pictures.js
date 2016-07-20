@@ -88,7 +88,6 @@ function toggleClass(className, domElement) {
 var Pictures = function () {
 
   /** @constructor */
-
   function Pictures(element) {
     _classCallCheck(this, Pictures);
 
@@ -251,11 +250,6 @@ var Pictures = function () {
       window.addEventListener('resize', this.resizeListener, true);
       this.setThumbnailMouseListeners(true);
 
-      var indicator = this.element.querySelector('.as24-pagination-indicator');
-      if (indicator) {
-        indicator.style.left = '50%';
-      }
-
       this.redraw();
     }
 
@@ -399,15 +393,14 @@ var Pictures = function () {
       distance = ~distance + 1;
       this.move({
         element: this.thumbnails,
-        y: distance + 'px'
+        y: distance
       });
 
       var indicator = this.element.querySelector('.as24-pagination-indicator');
       if (indicator) {
         this.move({
           element: indicator,
-          y: distance + 'px',
-          x: '-50%'
+          y: distance
         });
       }
     }
@@ -447,8 +440,8 @@ var Pictures = function () {
       var _options$y = options.y;
       var y = _options$y === undefined ? 0 : _options$y;
 
-      element.style.transform = 'translate3d(' + x + ', ' + y + ', 0)';
-      element.style.webkitTransform = 'translate3d(' + x + ', ' + y + '. 0)';
+      element.style.transform = 'translate3d(' + x + 'px, ' + y + 'px, 0)';
+      element.style.webkitTransform = 'translate3d(' + x + 'px, ' + y + 'px. 0)';
     }
 
     /**
