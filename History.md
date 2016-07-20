@@ -1,4 +1,11 @@
 
+1.0.9 / 2016-07-20
+==================
+
+  * Updated carousel version to 2.1.8
+  * Removed video frame from sample causing errors
+  * Reverted centering of counter
+
 1.0.8 / 2016-07-20
 ==================
 
