@@ -1,4 +1,10 @@
 
+1.0.8 / 2016-07-20
+==================
+
+  * Carousel version update
+  * Fixed broken html in sample
+
 1.0.7 / 2016-07-20
 ==================
 
