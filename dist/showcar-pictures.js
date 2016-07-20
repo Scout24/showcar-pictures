@@ -390,7 +390,7 @@ var Pictures = function () {
     value: function setThumbnailVisibility() {
       var state = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
 
-      if (this.thumbnailsVisible === state) return;
+      if (!this.thumbnails || this.thumbnailsVisible === state) return;
 
       this.thumbnailsVisible = state;
       var thumbnailHeight = this.thumbnails.offsetHeight;
