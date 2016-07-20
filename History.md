@@ -1,4 +1,11 @@
 
+1.0.7 / 2016-07-20
+==================
+
+  * Small check to avoid js error
+  * Centered the pagination counter for the gallery
+  * Fix problem with flickering thumbnail section when hovering over thumbnail paging button
+
 1.0.6 / 2016-07-19
 ==================
 
