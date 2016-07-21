@@ -114,7 +114,6 @@ class Pictures {
     });
   }
 
-
   /**
    * Set the full screen state.
    * @param {Boolean} state - the full screen state.
@@ -129,17 +128,21 @@ class Pictures {
       removeClass('fullScreen', this.element);
     }
 
-    this.slider.setAttribute('preview',String(!this.fullScreenState));
-    this.setThumbnailMouseListeners(!this.fullScreenState);
+    const that = this;
 
-    [].forEach.call(this.container, element => addClass('no-transition', element));
-    this.slider.redraw();
-    this.slider.goTo(index);
-    this.thumbnails.redraw();
-    this.thumbnails.goTo(index);
-    [].forEach.call(this.container, element => removeClass('no-transition', element));
+    window.setTimeout(function() {
+      that.slider.setAttribute('preview',String(!this.fullScreenState));
+      that.setThumbnailMouseListeners(!this.fullScreenState);
 
-    this.redraw();
+      [].forEach.call(that.container, element => addClass('no-transition', element));
+      that.slider.redraw();
+      that.slider.goTo(index);
+
+      that.thumbnails.redraw();
+      that.thumbnails.goTo(index);
+      [].forEach.call(that.container, element => removeClass('no-transition', element));
+      that.redraw();
+    });
   }
 
   /**

@@ -138,6 +138,9 @@ var Pictures = function () {
         addClass('active', _this2.thumbnailsItems[index]);
       });
     }
+  }, {
+    key: 'redrawCarouselElements',
+    value: function redrawCarouselElements() {}
 
     /**
      * Set the full screen state.
@@ -147,6 +150,7 @@ var Pictures = function () {
   }, {
     key: 'setFullScreenState',
     value: function setFullScreenState(state) {
+      console.log(1);
       if (this.fullScreenState === state) return;
       this.fullScreenState = state;
       var index = parseInt(this.slider.getIndex());
@@ -156,21 +160,25 @@ var Pictures = function () {
         removeClass('fullScreen', this.element);
       }
 
-      this.slider.setAttribute('preview', String(!this.fullScreenState));
-      this.setThumbnailMouseListeners(!this.fullScreenState);
+      var that = this;
 
-      [].forEach.call(this.container, function (element) {
-        return addClass('no-transition', element);
-      });
-      this.slider.redraw();
-      this.slider.goTo(index);
-      this.thumbnails.redraw();
-      this.thumbnails.goTo(index);
-      [].forEach.call(this.container, function (element) {
-        return removeClass('no-transition', element);
-      });
+      window.setTimeout(function () {
+        that.slider.setAttribute('preview', String(!this.fullScreenState));
+        that.setThumbnailMouseListeners(!this.fullScreenState);
 
-      this.redraw();
+        [].forEach.call(that.container, function (element) {
+          return addClass('no-transition', element);
+        });
+        that.slider.redraw();
+        that.slider.goTo(index);
+
+        that.thumbnails.redraw();
+        that.thumbnails.goTo(index);
+        [].forEach.call(that.container, function (element) {
+          return removeClass('no-transition', element);
+        });
+        that.redraw();
+      });
     }
 
     /**
@@ -415,6 +423,7 @@ var Pictures = function () {
   }, {
     key: 'redraw',
     value: function redraw() {
+      console.log('PICTURE REDRAW');
       var isFullScreen = containsClass('fullScreen', this.element);
       if (isFullScreen) return;
       var sliderSize = this.getElementSize(this.slider);
