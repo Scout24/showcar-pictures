@@ -42,7 +42,7 @@ as24-pictures {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         bottom: 0;
-        min-width: 40px;
+        width: 40px;
 
         transition: transform .4s;
         perspective: 1000px;
@@ -111,8 +111,6 @@ as24-pictures {
           left: -2px;
           width: calc(100% + 4px);
           height: calc(100% + 4px);
-          border: 0px solid black;
-          transition: border .3s;
         }
 
         &.active:after {
