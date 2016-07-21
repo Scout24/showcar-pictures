@@ -1,4 +1,10 @@
 
+1.0.10 / 2016-07-21
+==================
+
+  * Moved the check for fullscreen into click handler to avoid resizing issues.
+  * Undo centering of thumbs in L view
+
 1.0.9 / 2016-07-20
 ==================
 
