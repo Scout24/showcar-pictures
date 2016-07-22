@@ -1,4 +1,9 @@
 
+1.0.12 / 2016-07-22
+==================
+
+  * Execute carousel redrawing in set timeout to avoid miscalculation issues in FF
+
 1.0.11 / 2016-07-21
 ==================
 
