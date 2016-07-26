@@ -138,9 +138,6 @@ var Pictures = function () {
         addClass('active', _this2.thumbnailsItems[index]);
       });
     }
-  }, {
-    key: 'redrawCarouselElements',
-    value: function redrawCarouselElements() {}
 
     /**
      * Set the full screen state.
@@ -150,7 +147,6 @@ var Pictures = function () {
   }, {
     key: 'setFullScreenState',
     value: function setFullScreenState(state) {
-      console.log(1);
       if (this.fullScreenState === state) return;
       this.fullScreenState = state;
       var index = parseInt(this.slider.getIndex());
@@ -423,7 +419,6 @@ var Pictures = function () {
   }, {
     key: 'redraw',
     value: function redraw() {
-      console.log('PICTURE REDRAW');
       var isFullScreen = containsClass('fullScreen', this.element);
       if (isFullScreen) return;
       var sliderSize = this.getElementSize(this.slider);

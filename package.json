@@ -1,6 +1,6 @@
 {
   "name": "showcar-pictures",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A simple gallery component that works hand in hand with the showcar-carousel",
   "main": "dist/showcar-pictures.min.js",
   "scripts": {
@@ -52,7 +52,7 @@
   },
   "homepage": "https://github.com/AutoScout24/showcar-pictures#readme",
   "dependencies": {
-    "showcar-carousel": "^2.1.8"
+    "showcar-carousel": "2.1.x"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",

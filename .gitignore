@@ -108,3 +108,4 @@ node_modules/showcar-carousel/*
 !/node_modules/showcar-carousel/dist
 node_modules/showcar-ui/*
 !/node_modules/showcar-ui/dist
+*.iml
