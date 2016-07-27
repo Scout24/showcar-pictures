@@ -1,31 +1,183 @@
-//ToDo: add some vars!
+$thumbsPadding: 7px;
+$thumbWidth: 100px;
+$thumbsHeight: (($thumbWidth * 75) / 100) + ($thumbsPadding * 2);
 
-body {
-  margin: 0;
+$animationTime: .3s;
+
+@import "../node_modules/showcar-ui/src/scss/mixins/fonts.scss";
+@import "../node_modules/showcar-ui/src/scss/variables.scss";
+
+%animated {
+  transition: transform $animationTime;
+  perspective: 1000px;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
-as24-pictures {
+%column {
+  display: flex;
+  flex-direction: column;
+}
 
+$component: as24-pictures;
+
+.#{$component} {
   box-sizing: border-box;
   width: 100%;
   background: rgba(0,0,0,.5);
   display: block;
   position: relative;
   overflow: hidden;
-  //max-width: 960px;
 
-  .as24-pictures-fullScreen-close {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    right: 0;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoxNzM4NURCRUZCMjA2ODExODhDNjk2REM2MDk5OTRFQyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDoyQTU5QzM4Nzk1QUIxMUU0QkEyREQ0NDk4OThEMUE5QiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDoyQTU5QzM4Njk1QUIxMUU0QkEyREQ0NDk4OThEMUE5QiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgTWFjaW50b3NoIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RDc5Rjk2RTEyMjIwNjgxMTg4QzY4ODQ3NDdFODk2MzgiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MTczODVEQkVGQjIwNjgxMTg4QzY5NkRDNjA5OTk0RUMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7cfnTeAAABKklEQVR42uyXTQqDMBCFtTuhIARyjII38MA9gCAIgt0XunXVbQ7gNp3AhBYbJzOx4KJ58DbNZN4n+dGW1triSJ2Kg5UBMkAMoAUb8AhWgr4K5xjssS13DDfcghf71h2siHpvhbVeC/YK1lONjP1WDGId7mW25lBLcAv81oAHsA6MaRxrmL2iS1CBOxuWe0r9Uas3ntxijyplCTxEH4GgwnsqnAMQg3igk8K5AB5isHwNnHAJgASCHS4F8BAjET5KwmPHMKQzuCbGa6zhS0BL7XbqiP5kCbjh0mubBaCI8IHYmCyIveFV5HREIfaGc44oCUEBTMIbjroxpxSAp/TFQkA8UwCa1TdBx7xk1m9R1+OSugndxBl8Fd5wFc6ZqXDnMv8zygB/D/ASYADXLSBbWyI0twAAAABJRU5ErkJggg==') no-repeat;
-    width: 30px;
-    height: 30px;
+  &__header,
+  &__info {
+    display: none;
   }
 
-  .fullScreen-show {
-    display: none;
+  .no-transition {
+    transition: none !important;
+  }
+
+  @at-root &__slider-container {
+    @extend %column;
+    flex: 1;
+    position: relative;
+  }
+
+  @at-root &__image {
+    max-height: 100%;
+    object-fit: contain;
+    margin: 0 auto;
+    align-self: center;
+  }
+
+  .as24-pagination-indicator {
+    @extend %animated;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    bottom: 0;
+
+    &--upped {
+      transform: translate3d(0, -$thumbsHeight, 0);
+    }
+
+  }
+
+  @at-root &__thumbnails {
+    @extend %animated;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: $thumbsPadding;
+    width: 100%;
+    background: rgba(0,0,0,0.5);
+    transform: translate3d(0, 100%, 0);
+
+    &--visible {
+      transform: translate3d(0, 0, 0);
+    }
+
+    .as24-carousel-wrapper {
+      overflow: visible;
+    }
+
+    .as24-pagination {
+      width: 35px;
+      height: 75px;
+      margin-top: 0;
+      top: 7px;
+      background-size: 50%;
+      background-position: center;
+
+      &[data-direction="left"] {
+        left: 0;
+      }
+
+      &[data-direction="right"] {
+        right: 0;
+      }
+
+    }
+
+    .as24-carousel-item {
+      width: $thumbWidth;
+      height: 75px;
+      flex: 0 0 $thumbWidth;
+      position: relative;
+      margin: 0 2px;
+      cursor: pointer;
+
+      @media screen and (min-width: 320px) {
+        margin: 0 2px;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &:after {
+        position: absolute;
+        content: '';
+        top: -2px;
+        left: -2px;
+        width: calc(100% + 4px);
+        height: calc(100% + 4px);
+      }
+
+      &.active:after {
+        border: 2px solid #ff7500;
+      }
+
+    }
+
+    .as24-pagination-button {
+      width: 40px;
+      height: 100%;
+
+      &[data-direction="right"]{
+        right: 0;
+      }
+      &[data-direction="left"]{
+        left: 0;
+      }
+
+      &.hide {
+        z-index: -1;
+      }
+    }
+  }
+
+  @at-root &__fullscreen-close {
+    cursor: pointer;
+    color: #fff;
+    align-items: center;
+    padding: 1px 0 0 35px;
+    margin: 12px 0 0 30px;
+    position: relative;
+    &:after,
+    &:before {
+      content: '';
+      display: block;
+      width: 27px;
+      height: 0;
+      position: absolute;
+      left: 0;
+      top: 0;
+      border-top: solid 2px #fff;
+    }
+
+    &:before {
+      transform: translateY(10px) rotate(45deg);
+    }
+
+    &:after {
+      transform: translateY(10px) rotate(135deg);
+    }
   }
 
   as24-carousel {
@@ -35,166 +187,114 @@ as24-pictures {
       cursor: pointer;
     }
 
-    &.as24-pictures-slider {
-
-      .as24-pagination-indicator {
-        text-rendering: geometricPrecision;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        bottom: 0;
-        width: 40px;
-
-        transition: transform .4s;
-        perspective: 1000px;
-        transform: translate3d(0, 0, 0);
-        backface-visibility: hidden;
-      }
-      .as24-pagination-button {
-        transition: background-color .3s, opacity .3s, height .3s, top .3s, margin-top .3s;
-      }
-    }
-
-    &.as24-pictures-thumbnails {
-
-      position: absolute;
-      top: 100%;
-      left: 0;
-      padding: 7px 7px;
-      width: 100%;
-      background: rgba(0,0,0,0.5);
-
-      transition: transform .4s;
-      perspective: 1000px;
-      transform: translate3d(0, 0, 0);
-      backface-visibility: hidden;
-
-      .as24-carousel-wrapper {
-        overflow: visible;
-      }
-
-      .as24-pagination {
-        width: 35px;
-        height: 75px;
-        margin-top: 0px;
-        top: 7px;
-        background-size: 50%;
-        background-position: center;
-        &[data-direction="left"] {
-          left: 0px;
-        }
-        &[data-direction="right"] {
-          right: 0px;
-        }
-      }
-
-      .as24-carousel-item {
-        width: 100px;
-        position: relative;
-        margin: 0 2px;
-        cursor: pointer;
-
-        @media screen and (min-width: 320px) {
-          margin: 0 2px;
-        }
-
-        &:first-child {
-          margin-left: 0;
-        }
-        &:last-child {
-          margin-right: 0;
-        }
-
-        &:after {
-          position: absolute;
-          content: '';
-          top: -2px;
-          left: -2px;
-          width: calc(100% + 4px);
-          height: calc(100% + 4px);
-        }
-
-        &.active:after {
-          border: 2px solid #ff7500;
-        }
-      }
-
-      .as24-pagination-button {
-        width: 40px;
-        height: 100%;
-
-        &[data-direction="right"]{
-          right: 0;
-        }
-        &[data-direction="left"]{
-          left: 0;
-        }
-
-        &.hide {
-          z-index: -1;
-        }
-      }
-    }
   }
 
-  &.fullScreen {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    max-width: none;
+  @at-root &--fullscreen {
     background-color: rgba(0,0,0,0.9);
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
     left: 0;
     top: 0;
     z-index: 10000;
 
-    as24-carousel {
-      width: calc(100% - 200px);
-      float: left;
-      &.as24-pictures-thumbnails {
-        position: relative;
-        background: rgba(0,0,0,0.5);
+    .#{$component} {
+
+      &__container,
+      &__wrapper {
+        @extend %column;
+        height: 100%;
+        width: 100%;
       }
-    }
 
-    .fullScreen-show {
-      display: block;
-    }
+      &__content {
+        display: flex;
+        flex: 1 0 auto;
+      }
 
-    .as24-carousel-container.no-transition {
-      transition: none;
-    }
+      &__wrapper {
+        padding: $XXL;
+      }
 
-    .as24-pictures-wrapper {
-      position: absolute;
-      padding: 0 20px;
-      width: 100%;
-      height: 100%;
-      max-width: 1024px;
-      left: 50%;
-      transform: translate(-50%, 0);
-    }
+      &__header {
+        @extend %column;
+        margin-bottom: $XL;
 
-    .as24-pictures-container {
-      overflow: hidden;
-      position: relative;
-      width: 100%;
-      top: 50%;
-      transform: translate(0, -50%);
-    }
+        &-line {
+          display: flex;
+          flex: 1 0 auto;
+        }
+      }
 
-    .as24-pictures-header {
-      margin-bottom: 20px;
-
-      h2, h3 {
+      &__picture-title,
+      &__picture-subtitle {
         color: white;
       }
+
+      &__picture-title {
+        @include font(XXL, false);
+        flex: 1;
+        margin-bottom: 4px;
+      }
+
+      &__picture-subtitle {
+        @include font(M, false);
+      }
+
+      &__slider {
+        flex: 1 0 auto;
+
+        .as24-carousel-item {
+          max-width: none;
+        }
+
+        .as24-carousel-container {
+          height: auto;
+        }
+
+        &[mode=slider].dynamic-ratio .as24-pagination-button {
+          height: 60px;
+        }
+      }
+
+      &__thumbnails {
+        position: relative;
+        background: none;
+        transform: translate3d(0, 0, 0);
+        flex: 0 0 auto;
+
+        &--upped {
+          transform: translate3d(0, 0, 0);
+        }
+
+        .as24-carousel-container {
+          display: flex;
+          justify-content: center;
+        }
+      }
+
+      &__info {
+        @extend %column;
+        flex: 0 0 330px;
+        margin-left: 16px;
+      }
+
     }
 
-    .as24-pictures-ad {
-      display: block;
-      width: 180px;
-      height: 360px;
-      float: right;
-      background: white;
+    .as24-pagination-indicator {
+      &--upped {
+        transform: translate3d(0, 0, 0) !important;
+      }
     }
+
+    as24-carousel {
+      &[mode="slider"].dynamic-ratio .as24-carousel-wrapper {
+        height: auto;
+        padding-bottom: inherit;
+        overflow: initial;
+      }
+    }
+
   }
 }

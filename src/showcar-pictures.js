@@ -59,21 +59,6 @@ function containsClass(className, element) {
   return classList.indexOf(className) > -1;
 }
 
-/**
- * Toggles the class for the dom element
- * @param {string} className
- * @param {Element} domElement
- * @returns {Element}
- * ToDo: Move to ui utils library
- */
-function toggleClass(className, domElement) {
-  if (containsClass(className, domElement)) {
-    return removeClass(className, domElement);
-  } else {
-    return addClass(className, domElement);
-  }
-}
-
 // ToDo: Load larger images (data-src-large?)
 class Pictures {
 
@@ -93,7 +78,7 @@ class Pictures {
     if(!this.thumbnailsItems) return;
     addClass('active', this.thumbnailsItems[0]);
     [].forEach.call(this.thumbnailsItems, (element, index) => {
-      element.addEventListener('click', (e) => {
+      element.addEventListener('click', e => {
         e.preventDefault();
         this.slider.goTo(index);
       })
@@ -104,12 +89,12 @@ class Pictures {
    * Adds all handlers for the slider carousel.
    */
   addSlider() {
-    this.slider.addEventListener('slide', (e) => {
+    this.slider.addEventListener('slide', e => {
       let index = e.detail.index;
       if(!this.thumbnails) return;
       let goTo = index > this.thumbnails.getStepLength() ? this.thumbnails.getStepLength() : index;
       this.thumbnails.goTo(goTo);
-      [].forEach.call(this.thumbnailsItems, element => removeClass('active', element));
+      [].forEach.call(this.thumbnailsItems, el => removeClass('active', el));
       addClass('active', this.thumbnailsItems[index]);
     });
   }
@@ -123,19 +108,27 @@ class Pictures {
     this.fullScreenState = state;
     let index = parseInt(this.slider.getIndex());
     if(this.fullScreenState){
-      addClass('fullScreen', this.element);
+      addClass('as24-pictures--fullscreen', this.element);
     } else {
-      removeClass('fullScreen', this.element);
+      removeClass('as24-pictures--fullscreen', this.element);
     }
 
     const that = this;
+
+    var fullScreenEvent = new CustomEvent('as24-pictures.fullscreen', {
+      detail: {
+        state: state
+      }
+    });
+
+    document.body.dispatchEvent(fullScreenEvent);
 
     window.setTimeout(function() {
       that.slider.setAttribute('preview',String(!this.fullScreenState));
       that.setThumbnailMouseListeners(!this.fullScreenState);
 
       [].forEach.call(that.container, element => addClass('no-transition', element));
-      that.slider.redraw();
+      that.slider.redraw(that.fullScreenState ? 'data-fullscreen-src' : 'data-src');
       that.slider.goTo(index);
 
       that.thumbnails.redraw();
@@ -151,6 +144,7 @@ class Pictures {
    */
   fullScreenOpenHandler(event) {
     event.preventDefault();
+
     if(window.innerWidth < 1023) {
       return;
     }
@@ -166,7 +160,7 @@ class Pictures {
     const target = event.target || event.srcElement;
 
     if(this.fullScreenState) {
-      if(target.nodeName.toLowerCase() === 'as24-pictures' || target.classList.contains('as24-pictures-fullScreen-close')) {
+      if(target.nodeName.toLowerCase() === 'as24-pictures' || target.classList.contains('as24-pictures__fullscreen-close')) {
         this.setFullScreenState(false);
       }
     }
@@ -179,7 +173,7 @@ class Pictures {
     this.addContainer();
 
     // Slider
-    this.slider = this.element.querySelector('.as24-pictures-slider');
+    this.slider = this.element.querySelector('.as24-pictures__slider');
     if(this.slider) {
       this.addSlider();
       if(this.element.querySelector('.video-container')) {
@@ -193,11 +187,11 @@ class Pictures {
     }
 
     // Thumbnails
-    this.thumbnails = this.element.querySelector('.as24-pictures-thumbnails');
+    this.thumbnails = this.element.querySelector('.as24-pictures__thumbnails');
     if (this.thumbnails) this.addThumbnails();
 
     // FullScreen
-    this.fullScreen = this.element.querySelector('as24-pictures as24-carousel');
+    this.fullScreen = this.element.querySelector('.as24-pictures as24-carousel');
     if (this.fullScreen) {
       this.fullScreenOpenListener = this.fullScreenOpenHandler.bind(this);
       this.fullScreen.addEventListener('click', this.fullScreenOpenListener);
@@ -206,7 +200,7 @@ class Pictures {
     this.fullScreenCloseListener = this.fullScreenCloseHandler.bind(this);
     this.element.addEventListener('click', this.fullScreenCloseListener);
 
-    this.closeButton = this.element.querySelector('as24-pictures-fullScreen-close');
+    this.closeButton = this.element.querySelector('.as24-pictures__fullscreen-close');
     if (this.closeButton) {
       this.closeButton.addEventListener('click', this.fullScreenCloseListener);
     }
@@ -232,7 +226,7 @@ class Pictures {
       this.fullScreen.removeEventListener('click', this.fullScreenOpenListener);
     }
 
-    this.closeButton = this.element.querySelector('as24-pictures-fullScreen-close');
+    this.closeButton = this.element.querySelector('.as24-pictures__fullscreen-close');
     if(this.closeButton) {
       this.closeButton.addEventListener('click', this.fullScreenCloseListener);
     }
@@ -247,7 +241,7 @@ class Pictures {
    * @param {Boolean} state - the state of the listeners
    */
   setThumbnailMouseListeners(state){
-    this.sliderContainer = this.element.querySelector('.as24-pictures-slider-container');
+    this.sliderContainer = this.element.querySelector('.as24-pictures__slider-container');
     if(state){
       this.setThumbnailMouseListeners(false);
       this.mouseEnterListener = this.mouseEnterHandler.bind(this);
@@ -266,17 +260,17 @@ class Pictures {
    */
   addContainer() {
 
-    if (containsClass('as24-pictures-wrapper', this.element.firstChild)){
-      this.wrapper = this.element.querySelector('.as24-pictures-wrapper');
-      this.container = this.element.querySelector('.as24-pictures-container');
+    if (containsClass('as24-pictures__wrapper', this.element.firstChild)){
+      this.wrapper = this.element.querySelector('.as24-pictures__wrapper');
+      this.container = this.element.querySelector('.as24-pictures__container');
       return;
     }
 
     this.wrapper = document.createElement('div');
-    addClass('as24-pictures-wrapper', this.wrapper);
+    addClass('as24-pictures__wrapper', this.wrapper);
 
     this.container = document.createElement('div');
-    addClass('as24-pictures-container', this.container);
+    addClass('as24-pictures__container', this.container);
 
     [].forEach.call(this.element.children, element => {
       let item = element.cloneNode(true);
@@ -325,24 +319,16 @@ class Pictures {
    * {Boolean} state - the thumbnail component visibility state.
    */
   setThumbnailVisibility(state = false){
-    if(!this.thumbnails || this.thumbnailsVisible === state) return;
+    if (!this.thumbnails || this.thumbnailsVisible === state) return;
 
     this.thumbnailsVisible = state;
-    let thumbnailHeight = this.thumbnails.offsetHeight;
-    let distance = state ? thumbnailHeight : 0;
+    const indicator = this.element.querySelector('.as24-pagination-indicator');
+    const thumbsVisibilityModifier = 'as24-pictures__thumbnails--visible';
+    const indicatorVisibilityModifier = 'as24-pagination-indicator--upped';
 
-    distance = ~distance + 1;
-    this.move({
-      element: this.thumbnails,
-      y: distance
-    });
-
-    let indicator = this.element.querySelector('.as24-pagination-indicator');
-    if(indicator){
-      this.move({
-        element: indicator,
-        y: distance
-      });
+    state ? addClass(thumbsVisibilityModifier, this.thumbnails) : removeClass(thumbsVisibilityModifier, this.thumbnails);
+    if (indicator) {
+      state ? addClass(indicatorVisibilityModifier, indicator) : removeClass(indicatorVisibilityModifier, indicator);
     }
   }
 
@@ -351,7 +337,7 @@ class Pictures {
    * @public
    */
   redraw() {
-    let isFullScreen = containsClass('fullScreen', this.element);
+    let isFullScreen = containsClass('as24-pictures--fullscreen', this.element);
     if(isFullScreen) return;
     let sliderSize = this.getElementSize(this.slider);
     // avoids the thumbnail view on small sizes
@@ -360,16 +346,6 @@ class Pictures {
     } else {
       this.setThumbnailMouseListeners(true);
     }
-  }
-
-  /**
-   * Moves the element by the given distance.
-   * @param {Object} options - the values for moving an element.
-   */
-  move(options = {element: this.element, x: 0, y: 0}){
-    let {element: element = this.element, x: x = 0, y: y = 0} = options;
-    element.style.transform =       `translate3d(${x}px, ${y}px, 0)`;
-    element.style.webkitTransform = `translate3d(${x}px, ${y}px. 0)`;
   }
 
   /**
