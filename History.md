@@ -1,4 +1,11 @@
 
+1.1.0 / 2016-08-03
+==================
+
+  * Full screen improvements
+  * Merge pull request #1 from andreas-schroeder/master
+  * whitelisting git secrets false positives
+
 1.0.13 / 2016-07-26
 ==================
 
