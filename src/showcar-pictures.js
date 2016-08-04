@@ -124,11 +124,11 @@ class Pictures {
     document.body.dispatchEvent(fullScreenEvent);
 
     window.setTimeout(function() {
-      that.slider.setAttribute('preview',String(!this.fullScreenState));
-      that.setThumbnailMouseListeners(!this.fullScreenState);
+      that.slider.setAttribute('preview',String(!state));
+      that.setThumbnailMouseListeners(!state);
 
       [].forEach.call(that.container, element => addClass('no-transition', element));
-      that.slider.redraw(that.fullScreenState ? 'data-fullscreen-src' : 'data-src');
+      that.slider.redraw(state ? 'data-fullscreen-src' : 'data-src');
       that.slider.goTo(index);
 
       that.thumbnails.redraw();

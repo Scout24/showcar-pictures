@@ -1,4 +1,9 @@
 
+1.1.2 / 2016-08-04
+==================
+
+  * Mathias / Ivan: fix for full screen state handling which in turn fix the bug when only 2 imgs are there
+
 1.1.1 / 2016-08-04
 ==================
 
