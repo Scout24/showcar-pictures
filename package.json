@@ -1,6 +1,6 @@
 {
   "name": "showcar-pictures",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A simple gallery component that works hand in hand with the showcar-carousel",
   "main": "dist/showcar-pictures.min.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "build:babel": "mkdir dist && babel $npm_package_config_src.js -o $npm_package_config_dist.js -s",
     "build:uglify": "uglifyjs $npm_package_config_dist.js --o $npm_package_config_dist.min.js --source-map dist/showcar-pictures.min.js.map -p 5 -c -m",
     "build:css": "npm run build:sass && npm run build:autoprefixer && npm run build:cleancss",
-    "build:sass": "node-sass ./src/ -o ./dist/",
+    "build:sass": "node-sass ./src/ -o ./dist/ --importer ./importer.sass.js",
     "build:autoprefixer": "node ./node_modules/postcss-cli/bin/postcss --use autoprefixer $npm_package_config_dist.css -d dist/",
     "build:cleancss": "cleancss --source-map -o $npm_package_config_dist.min.css $npm_package_config_dist.css",
     "build": "npm run build:js && npm run build:css",
@@ -19,7 +19,7 @@
     "postbuild": "echo 'Build succeeded!'",
     "prod": "npm run build",
     "watch:server": "nodemon --ignore dist --ignore src --ignore node_modules ./example/server.js",
-    "watch:sass": "node-sass -w ./src/ -o ./dist/",
+    "watch:sass": "node-sass -w ./src/ -o ./dist/ --importer ./importer.sass.js",
     "watch:babel": "babel $npm_package_config_src.js -w -o $npm_package_config_dist.js -s",
     "watch:browser": "livereload",
     "prewatch": "echo 'Starting watchers'",

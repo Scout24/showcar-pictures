@@ -1,4 +1,9 @@
 
+1.1.1 / 2016-08-04
+==================
+
+  * Added custom importer in order to be able to import external sass files using npm: prefix
+
 1.1.0 / 2016-08-03
 ==================
 

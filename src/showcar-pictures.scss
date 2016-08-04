@@ -4,8 +4,8 @@ $thumbsHeight: (($thumbWidth * 75) / 100) + ($thumbsPadding * 2);
 
 $animationTime: .3s;
 
-@import "../node_modules/showcar-ui/src/scss/mixins/fonts.scss";
-@import "../node_modules/showcar-ui/src/scss/variables.scss";
+@import "npm:showcar-ui/src/scss/mixins/fonts.scss";
+@import "npm:showcar-ui/src/scss/variables.scss";
 
 %animated {
   transition: transform $animationTime;
