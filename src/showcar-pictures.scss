@@ -190,7 +190,7 @@ $component: as24-pictures;
   }
 
   @at-root &--fullscreen {
-    background-color: rgba(0,0,0,0.9);
+    background-color: #000;
     display: flex;
     position: fixed;
     width: 100%;
@@ -198,6 +198,10 @@ $component: as24-pictures;
     left: 0;
     top: 0;
     z-index: 10000;
+
+    .as24-carousel-item {
+      background-color: #000;
+    }
 
     .#{$component} {
 
