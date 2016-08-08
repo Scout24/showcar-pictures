@@ -1,4 +1,9 @@
 
+1.1.5 / 2016-08-08
+==================
+
+  * Removed gray background from as24-pictures element
+
 1.1.4 / 2016-08-08
 ==================
 
