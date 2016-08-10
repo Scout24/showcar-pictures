@@ -1,4 +1,11 @@
 
+1.2.0 / 2016-08-10
+==================
+
+  * Added custom events
+  * Prevent opening full screen mode on < 1024
+  * Minor bug fix
+
 1.1.5 / 2016-08-08
 ==================
 
