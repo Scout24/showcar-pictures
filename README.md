@@ -50,11 +50,9 @@ See the following example below:
         </as24-carousel>
         <as24-carousel role="thumbnails" class="as24-pictures__thumbnails" gap="4">
           <div class="as24-carousel-item">
-            <div class="as24-carousel-image-container">
-              <img data-src="..."
-                   src=""
-                   alt="">
-            </div>
+            <img data-src="..."
+                 src=""
+                 alt="">
           </div>
         </as24-carousel>
       </div>

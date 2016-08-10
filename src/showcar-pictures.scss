@@ -103,6 +103,8 @@ $component: as24-pictures;
       width: $thumbWidth;
       height: 75px;
       flex: 0 0 $thumbWidth;
+      display: flex;
+      justify-content: center;
       position: relative;
       margin: 0 2px;
       cursor: pointer;

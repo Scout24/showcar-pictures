@@ -95,9 +95,11 @@ var Pictures = function () {
     this.fullScreenState = false;
 
     this.element.addEventListener('as24-carousel.slide', function (e) {
+      var data = void 0;
       e.stopPropagation();
       if (e.detail.role === "slider") {
-        dispatchEvent('as24-pictures.slide', extend({ fullscreen: this.fullScreenState }, e.detail), this.element);
+        data = extend({ fullscreen: this.fullScreenState }, e.detail);
+        dispatchEvent('as24-pictures.slide', data, this.element);
       }
     }.bind(this));
   }
