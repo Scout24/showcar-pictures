@@ -8,13 +8,13 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://as24-showcar-ui.aws.autoscout24.com/dist/showcar-ui.css">
-  <link rel="stylesheet" href="node_modules/showcar-carousel/dist/showcar-carousel.min.css">
+  <link rel="stylesheet" href="node_modules/showcar-carousel/dist/showcar-carousel.css">
   <link rel="stylesheet" href="example/example.css">
   <link rel="stylesheet" href="dist/showcar-pictures.css">
 </head>
 <body>
 <p>The viewport is limited to 640px</p>
-<div style="max-width: 640px">
+<div>
 <as24-pictures class="as24-pictures">
   <div class="as24-pictures__header">
     <div class="as24-pictures__header-line">
@@ -27,7 +27,7 @@
   </div>
   <div class="as24-pictures__content">
     <div class="as24-pictures__slider-container">
-      <as24-carousel class="as24-pictures__slider" mode="slider" gap="0" preview="true" indicator="true">
+      <as24-carousel class="as24-pictures__slider" mode="slider" gap="0" preview="false" indicator="true">
         <div class="as24-carousel-item">
             <img class="as24-pictures__image"
                  data-src="http://placehold.it/640x480/d91a2a/ffffff?text=640x480,1"

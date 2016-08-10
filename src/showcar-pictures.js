@@ -104,38 +104,39 @@ class Pictures {
    * @param {Boolean} state - the full screen state.
    */
   setFullScreenState(state){
-    if(this.fullScreenState === state) return;
+    if (this.fullScreenState === state) return;
+
     this.fullScreenState = state;
+
     let index = parseInt(this.slider.getIndex());
-    if(this.fullScreenState){
+
+    if(this.fullScreenState) {
       addClass('as24-pictures--fullscreen', this.element);
     } else {
       removeClass('as24-pictures--fullscreen', this.element);
     }
 
-    const that = this;
-
-    var fullScreenEvent = new CustomEvent('as24-pictures.fullscreen', {
+    document.body.dispatchEvent(new CustomEvent('as24-pictures.fullscreen', {
       detail: {
-        state: state
+        state: this.fullScreenState
       }
-    });
-
-    document.body.dispatchEvent(fullScreenEvent);
+    }));
 
     window.setTimeout(function() {
-      that.slider.setAttribute('preview',String(!state));
-      that.setThumbnailMouseListeners(!state);
+      this.slider.setAttribute('preview', String(!this.fullScreenState));
+      this.setThumbnailMouseListeners(!this.fullScreenState);
 
-      [].forEach.call(that.container, element => addClass('no-transition', element));
-      that.slider.redraw(state ? 'data-fullscreen-src' : 'data-src');
-      that.slider.goTo(index);
+      addClass('no-transition', this.container);
 
-      that.thumbnails.redraw();
-      that.thumbnails.goTo(index);
-      [].forEach.call(that.container, element => removeClass('no-transition', element));
-      that.redraw();
-    });
+      this.slider.redraw(this.fullScreenState ? 'data-fullscreen-src' : 'data-src');
+      this.slider.goTo(index);
+      this.thumbnails.redraw();
+      this.thumbnails.goTo(index);
+
+      removeClass('no-transition', this.container);
+
+      this.redraw();
+    }.bind(this));
   }
 
   /**
@@ -145,7 +146,7 @@ class Pictures {
   fullScreenOpenHandler(event) {
     event.preventDefault();
 
-    if(window.innerWidth < 1023) {
+    if(window.innerWidth <= 1024) {
       return;
     }
 

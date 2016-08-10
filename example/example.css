@@ -21,10 +21,6 @@ body {
   height: 480px;
 }
 
-.as24-pictures__slider .as24-carousel-item {
-  max-width: 640px;
-}
-
 .ads {
   height: 200px;
   background: #ccc;
