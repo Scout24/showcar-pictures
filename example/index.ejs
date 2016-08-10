@@ -14,7 +14,7 @@
 </head>
 <body>
 <p>The viewport is limited to 640px</p>
-<div>
+<div id="wrapper">
 <as24-pictures class="as24-pictures">
   <div class="as24-pictures__header">
     <div class="as24-pictures__header-line">
@@ -27,7 +27,7 @@
   </div>
   <div class="as24-pictures__content">
     <div class="as24-pictures__slider-container">
-      <as24-carousel class="as24-pictures__slider" mode="slider" gap="0" preview="false" indicator="true">
+      <as24-carousel class="as24-pictures__slider" role="slider" mode="slider" gap="0" preview="false" indicator="true">
         <div class="as24-carousel-item">
             <img class="as24-pictures__image"
                  data-src="http://placehold.it/640x480/d91a2a/ffffff?text=640x480,1"
@@ -85,7 +85,7 @@
                  alt="">
         </div>
       </as24-carousel>
-      <as24-carousel class="as24-pictures__thumbnails" gap="4">
+      <as24-carousel role="thumbnails" class="as24-pictures__thumbnails" gap="4">
         <div class="as24-carousel-item">
           <div class="as24-carousel-image-container">
             <img data-src="http://placehold.it/100x75/d91a2a/ffffff?text=1"
@@ -206,6 +206,13 @@
 
 <script>
   document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
+
+  var _wrapper = document.getElementById('wrapper');
+  _wrapper.addEventListener('as24-pictures.fullscreen', console.log.bind(console));
+  _wrapper.addEventListener('as24-pictures.slide', console.log.bind(console));
+  _wrapper.addEventListener('as24-carousel.slide', function(e) {
+    console.log('from carousel', e);
+  });
 </script>
 </body>
 </html>

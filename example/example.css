@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+#wrapper {
+  max-width: 640px;
+}
+
 .car-info {
   color: #fff;
   margin-bottom: 32px;

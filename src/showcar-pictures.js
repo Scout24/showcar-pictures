@@ -59,6 +59,19 @@ function containsClass(className, element) {
   return classList.indexOf(className) > -1;
 }
 
+function dispatchEvent(evtName, payload, element) {
+  var evt = new CustomEvent(evtName, { detail: payload, bubbles: true });
+  element.dispatchEvent(evt);
+  return element;
+}
+
+function extend(dst, src) {
+  for (var k in src) {
+    dst[k] = src[k];
+  }
+  return dst;
+}
+
 // ToDo: Load larger images (data-src-large?)
 class Pictures {
 
@@ -68,6 +81,15 @@ class Pictures {
     this.resizeListener = null;
     this.thumbnailsVisible = false;
     this.fullScreenState = false;
+
+    this.element.addEventListener('as24-carousel.slide', function(e) {
+      let data;
+      e.stopPropagation();
+      if (e.detail.role === "slider") {
+        data = extend({ fullscreen:this.fullScreenState }, e.detail);
+        dispatchEvent('as24-pictures.slide', data, this.element);
+      }
+    }.bind(this));
   }
 
   /**
@@ -89,11 +111,19 @@ class Pictures {
    * Adds all handlers for the slider carousel.
    */
   addSlider() {
-    this.slider.addEventListener('slide', e => {
+    this.slider.addEventListener('as24-carousel.slide', e => {
       let index = e.detail.index;
-      if(!this.thumbnails) return;
       let goTo = index > this.thumbnails.getStepLength() ? this.thumbnails.getStepLength() : index;
-      this.thumbnails.goTo(goTo);
+
+      switch(e.detail.role) {
+        case 'slider':
+          this.thumbnails.goTo(goTo);
+          break;
+        case 'thumbnails':
+          this.slider.goTo(goTo);
+          break;
+      }
+
       [].forEach.call(this.thumbnailsItems, el => removeClass('active', el));
       addClass('active', this.thumbnailsItems[index]);
     });
@@ -116,11 +146,7 @@ class Pictures {
       removeClass('as24-pictures--fullscreen', this.element);
     }
 
-    document.body.dispatchEvent(new CustomEvent('as24-pictures.fullscreen', {
-      detail: {
-        state: this.fullScreenState
-      }
-    }));
+    dispatchEvent('as24-pictures.fullscreen', { fullscreen: this.fullScreenState }, this.element);
 
     window.setTimeout(function() {
       this.slider.setAttribute('preview', String(!this.fullScreenState));
@@ -177,14 +203,6 @@ class Pictures {
     this.slider = this.element.querySelector('.as24-pictures__slider');
     if(this.slider) {
       this.addSlider();
-      if(this.element.querySelector('.video-container')) {
-        this.slider.addEventListener('slide', function(event) {
-          if(event.detail.index !== 0) {
-            var videoFrame = document.querySelector('as24-pictures .video-container iframe');
-            videoFrame.contentWindow.postMessage('{"event":"command","func":"' + 'stopVideo' + '","args":""}', '*');
-          }
-        });
-      }
     }
 
     // Thumbnails

@@ -1,7 +1,7 @@
 # showcar-pictures
 
 This module provides a easy to use vanilla js gallery library with previews and full screen view.
-Actually it is just a wrapper that handles the communication between two [showcar-carousel](https://github.com/AutoScout24/showcar-carousel) components. 
+Actually it is just a wrapper that handles the communication between two [showcar-carousel](https://github.com/AutoScout24/showcar-carousel) components.
 
 ***
 
@@ -26,50 +26,50 @@ Visit: [http://localhost:8080](http://localhost:8080)
 See the following example below:
 
 ```html
-
-<as24-pictures class="as24-pictures">
-  <div class="as24-pictures__header fullScreen-show">
-    <div class="as24-pictures__header-line">
-      <h2 class="as24-pictures__picture-title"><!-- Big title of the picture --></h2>
-      <i class="as24-pictures__fullscreen-close"><!-- Close button text --></i>
+<div id="my-pics">
+  <as24-pictures class="as24-pictures">
+    <div class="as24-pictures__header">
+      <div class="as24-pictures__header-line">
+        <h2 class="as24-pictures__picture-title">Car name</h2>
+        <i class="as24-pictures__fullscreen-close">Schließen</i>
+      </div>
+      <div class="as24-pictures__header-line">
+        <h5 class="as24-pictures__picture-subtitle">Car short info</h5>
+      </div>
     </div>
-    <div class="as24-pictures__header-line">
-      <h5 class="as24-pictures__picture-subtitle"><!-- Subtitle text --></h5>
-    </div>
-  </div>
-  <div class="as24-pictures__content">
-    <div class="as24-pictures__slider-container">
-      <as24-carousel class="as24-pictures__slider" mode="slider" gap="0" preview="true" indicator="true">
-        <div class="as24-carousel-item">
-            <img class="as24-pictures__image"
-                 <!-- The URL of a pic in preview mode -->
-                 data-src="http://..."
-                 <!-- The URL of a pic in fullscreen mode -->
-                 data-fullscreen-src="http://..."
-                 src=""
-                 alt="">
-        </div>
-        <!-- more pics here -->
-      </as24-carousel>
-      <as24-carousel class="as24-pictures__thumbnails" gap="4">
-        <div class="as24-carousel-item">
-          <div class="as24-carousel-image-container">
-            <img data-src="http://placehold.it/100x75/d91a2a/ffffff?text=1" src="" alt="">
+    <div class="as24-pictures__content">
+      <div class="as24-pictures__slider-container">
+        <as24-carousel class="as24-pictures__slider" role="slider" mode="slider" gap="0" preview="false" indicator="true">
+          <div class="as24-carousel-item">
+              <img class="as24-pictures__image"
+                   data-src="..."
+                   data-fullscreen-src="..."
+                   src=""
+                   alt="">
           </div>
-        </div>
-        <!-- more thumbs here -->
-      </as24-carousel>
+        </as24-carousel>
+        <as24-carousel role="thumbnails" class="as24-pictures__thumbnails" gap="4">
+          <div class="as24-carousel-item">
+            <div class="as24-carousel-image-container">
+              <img data-src="..."
+                   src=""
+                   alt="">
+            </div>
+          </div>
+        </as24-carousel>
+      </div>
+      <aside class="as24-pictures__info">
+        <!-- custom car info -->
+        <!-- ads -->
+        <!-- whatever else -->
+      </aside>
     </div>
-    <aside class="as24-pictures__info">
-      <div class="car-info"><!-- space for car info --></div>
-      <div class="ads"><!-- space for ads --></div>
-    </aside>
-  </div>
-</as24-pictures>
+  </as24-pictures>
+</div>
 ```
 *Note: The number of the thumbnails and the number of slides MUST be the same!*
 
-#### CSS Styling 
+#### CSS Styling
 
 As to styles, you only have to specify these:
 
@@ -90,6 +90,30 @@ This one to know what is the height of the slider (and images as a result). As i
 As we also need to know the maximal width of the an image in the slider.
 
 For more information on styling have a look at the [showcar-carousel](https://github.com/AutoScout24/showcar-carousel) documentation.
+
+#### Custom Events
+
+The library triggers following custom events with `event.detail`:
+
+ * `as24-pictures.fullscreen` - when fullscreen mode is toggled
+
+   ```js
+   {
+     fullscreen: true
+   }
+   ```
+
+ * `as24-pictures.slide` - when the image of the slider has been changed
+
+   ```js
+   {
+     direction: "right",
+     fullscreen: true,
+     id: "",
+     index: 6,
+     role: "slider"
+   }
+   ```
 
 ## Installation
 
@@ -124,7 +148,7 @@ Afterwards you need to add some css and js to your page.
 * Fork this repository.      
 * Then install the required dependencies.
     ```
-    $> npm install 
+    $> npm install
     ```  
 * Start the dev server.
     ```
