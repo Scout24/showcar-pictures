@@ -1,4 +1,9 @@
 
+1.2.3 / 2016-08-11
+==================
+
+  * Fixed a bug with opening fullscreen mode after going back
+
 1.2.0 / 2016-08-10
 ==================
 

@@ -182,10 +182,10 @@ var Pictures = function () {
 
         addClass('no-transition', this.container);
 
-        this.slider.redraw(this.fullScreenState ? 'data-fullscreen-src' : 'data-src');
         this.slider.goTo(index);
-        this.thumbnails.redraw();
+        this.slider.redraw(this.fullScreenState ? 'data-fullscreen-src' : 'data-src');
         this.thumbnails.goTo(index);
+        this.thumbnails.redraw();
 
         removeClass('no-transition', this.container);
 
