@@ -10,9 +10,16 @@ body {
   max-width: 100vw;
 }
 
+.as24-pictures__slider .as24-carousel-container {
+  height: 75vw;
+}
+
 @media (min-width: 640px) {
   .as24-pictures__slider .as24-carousel-item {
     max-width: 640px;
+  }
+  .as24-pictures__slider .as24-carousel-container {
+    height: 480px;
   }
 }
 
@@ -29,10 +36,6 @@ body {
 
 .ads {
   background: #ccc;
-}
-
-.as24-pictures__slider .as24-carousel-container {
-  height: 480px;
 }
 
 .ads {
