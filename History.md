@@ -1,4 +1,9 @@
 
+1.2.5 / 2016-08-12
+==================
+
+  * Fixed the size and positioning of thumbnails
+
 1.2.3 / 2016-08-11
 ==================
 

@@ -277,6 +277,12 @@ $component: as24-pictures;
           display: flex;
           justify-content: center;
         }
+
+        .as24-carousel-item {
+          img {
+            max-height: 100%;
+          }
+        }
       }
 
       &__info {
