@@ -30,6 +30,12 @@
     margin: 0 auto;
     -ms-flex-item-align: center;
         align-self: center; }
+  .as24-pictures__iframe {
+    margin: 0 auto;
+    -ms-flex-item-align: center;
+        align-self: center;
+    width: 100%;
+    height: 100%; }
   .as24-pictures .as24-pagination-indicator {
     -webkit-transition: -webkit-transform 0.3s;
     transition: -webkit-transform 0.3s;
