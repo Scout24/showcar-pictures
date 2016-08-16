@@ -1,4 +1,9 @@
 
+1.2.7 / 2016-08-16
+==================
+
+  * Fixed media query for Lightbox appearance on tables
+
 1.2.6 / 2016-08-16
 ==================
 

@@ -5,23 +5,10 @@ $thumbsHeight: (($thumbWidth * 75) / 100) + ($thumbsPadding * 2);
 $animationTime: .3s;
 
 @import "npm:showcar-ui/src/scss/mixins/fonts.scss";
+@import "npm:showcar-ui/src/scss/mixins/utils.scss";
 @import "npm:showcar-ui/src/scss/variables.scss";
 
-%animated {
-  transition: transform $animationTime;
-  perspective: 1000px;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-}
-
-%column {
-  display: flex;
-  flex-direction: column;
-}
-
-$component: as24-pictures;
-
-.#{$component} {
+.as24-pictures {
   box-sizing: border-box;
   width: 100%;
   display: block;
@@ -38,7 +25,8 @@ $component: as24-pictures;
   }
 
   @at-root &__slider-container {
-    @extend %column;
+    display: flex;
+    flex-direction: column;;
     flex: 1;
     position: relative;
     min-width: 0px;
@@ -52,7 +40,10 @@ $component: as24-pictures;
   }
 
   .as24-pagination-indicator {
-    @extend %animated;
+    transition: transform $animationTime;
+    perspective: 1000px;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;;
     text-rendering: geometricPrecision;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -65,7 +56,10 @@ $component: as24-pictures;
   }
 
   @at-root &__thumbnails {
-    @extend %animated;
+    transition: transform $animationTime;
+    perspective: 1000px;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -192,120 +186,126 @@ $component: as24-pictures;
   }
 
   @at-root &--fullscreen {
-    background-color: #000;
-    display: flex;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    z-index: 10000;
-
-    .as24-carousel-item {
+    @include mqmin(1025px) {
       background-color: #000;
-    }
+      display: flex;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      z-index: 10000;
 
-    .#{$component} {
-
-      &__container,
-      &__wrapper {
-        @extend %column;
-        height: 100%;
-        width: 100%;
+      .as24-carousel-item {
+        background-color: #000;
       }
 
-      &__content {
-        display: flex;
-        flex: 1 0 auto;
-      }
+      .as24-pictures {
 
-      &__wrapper {
-        padding: $XXL;
-      }
+        &__container,
+        &__wrapper {
+          display: flex;
+          flex-direction: column;;
+          height: 100%;
+          width: 100%;
+        }
 
-      &__header {
-        @extend %column;
-        margin-bottom: $XL;
-
-        &-line {
+        &__content {
           display: flex;
           flex: 1 0 auto;
         }
-      }
 
-      &__picture-title,
-      &__picture-subtitle {
-        color: white;
-      }
-
-      &__picture-title {
-        @include font(XXL, false);
-        flex: 1;
-        margin-bottom: 4px;
-      }
-
-      &__picture-subtitle {
-        @include font(M, false);
-      }
-
-      &__slider {
-        flex: 1 0 auto;
-
-        .as24-carousel-item {
-          max-width: none;
+        &__wrapper {
+          padding: $XXL;
         }
 
-        .as24-carousel-container {
-          height: auto;
-        }
-
-        &[mode=slider].dynamic-ratio .as24-pagination-button {
-          height: 60px;
-        }
-      }
-
-      &__thumbnails {
-        position: relative;
-        background: none;
-        transform: translate3d(0, 0, 0);
-        flex: 0 0 auto;
-
-        &--upped {
-          transform: translate3d(0, 0, 0);
-        }
-
-        .as24-carousel-container {
+        &__header {
           display: flex;
-          justify-content: center;
-        }
+          flex-direction: column;;
+          margin-bottom: $XL;
 
-        .as24-carousel-item {
-          img {
-            max-height: 100%;
+          &-line {
+            display: flex;
+            flex: 1 0 auto;
           }
         }
+
+        &__picture-title,
+        &__picture-subtitle {
+          color: white;
+        }
+
+        &__picture-title {
+          @include font(XXL, false);
+          flex: 1;
+          margin-bottom: 4px;
+        }
+
+        &__picture-subtitle {
+          @include font(M, false);
+        }
+
+        &__slider {
+          flex: 1 0 auto;
+
+          .as24-carousel-item {
+            max-width: none;
+          }
+
+          .as24-carousel-container {
+            height: auto;
+          }
+
+          &[mode=slider].dynamic-ratio .as24-pagination-button {
+            height: 60px;
+          }
+        }
+
+        &__thumbnails {
+          position: relative;
+          background: none;
+          transform: translate3d(0, 0, 0);
+          flex: 0 0 auto;
+
+          &--upped {
+            transform: translate3d(0, 0, 0);
+          }
+
+          .as24-carousel-container {
+            display: flex;
+            justify-content: center;
+          }
+
+          .as24-carousel-item {
+            img {
+              max-height: 100%;
+            }
+          }
+        }
+
+        &__info {
+          display: flex;
+          flex-direction: column;;
+          flex: 0 0 330px;
+          margin-left: 16px;
+        }
+
       }
 
-      &__info {
-        @extend %column;
-        flex: 0 0 330px;
-        margin-left: 16px;
+      .as24-pagination-indicator {
+        &--upped {
+          transform: translate3d(0, 0, 0) !important;
+        }
       }
 
-    }
-
-    .as24-pagination-indicator {
-      &--upped {
-        transform: translate3d(0, 0, 0) !important;
+      as24-carousel {
+        &[mode="slider"].dynamic-ratio .as24-carousel-wrapper {
+          height: auto;
+          padding-bottom: inherit;
+          overflow: initial;
+        }
       }
-    }
 
-    as24-carousel {
-      &[mode="slider"].dynamic-ratio .as24-carousel-wrapper {
-        height: auto;
-        padding-bottom: inherit;
-        overflow: initial;
-      }
     }
 
   }
