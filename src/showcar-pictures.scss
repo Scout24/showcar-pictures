@@ -14,6 +14,7 @@ $animationTime: .3s;
   display: block;
   position: relative;
   overflow: hidden;
+  background: rgba(0,0,0,.95);
 
   &__header,
   &__info {
@@ -245,6 +246,7 @@ $animationTime: .3s;
           flex: 1 0 auto;
 
           .as24-carousel-item {
+            background: transparent;
             max-width: none;
           }
 

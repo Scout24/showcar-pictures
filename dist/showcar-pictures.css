@@ -3,7 +3,8 @@
   width: 100%;
   display: block;
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.95); }
   .as24-pictures__header, .as24-pictures__info {
     display: none; }
   .as24-pictures .no-transition {
@@ -212,6 +213,7 @@
             -ms-flex: 1 0 auto;
                 flex: 1 0 auto; }
         .as24-pictures--fullscreen .as24-pictures__slider .as24-carousel-item {
+          background: transparent;
           max-width: none; }
         .as24-pictures--fullscreen .as24-pictures__slider .as24-carousel-container {
           height: auto; }

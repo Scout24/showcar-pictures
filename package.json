@@ -1,6 +1,6 @@
 {
   "name": "showcar-pictures",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "A simple gallery component that works hand in hand with the showcar-carousel",
   "main": "dist/showcar-pictures.min.js",
   "scripts": {
