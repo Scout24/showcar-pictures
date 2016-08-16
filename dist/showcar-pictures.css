@@ -34,7 +34,8 @@
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
-    position: relative; }
+    position: relative;
+    min-width: 0px; }
   .as24-pictures__image {
     max-height: 100%;
     -o-object-fit: contain;
@@ -215,6 +216,8 @@
         -webkit-box-pack: center;
             -ms-flex-pack: center;
                 justify-content: center; }
+      .as24-pictures--fullscreen .as24-pictures__thumbnails .as24-carousel-item img {
+        max-height: 100%; }
     .as24-pictures--fullscreen .as24-pictures__info {
       -webkit-box-flex: 0;
           -ms-flex: 0 0 330px;

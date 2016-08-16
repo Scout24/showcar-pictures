@@ -41,6 +41,7 @@ $component: as24-pictures;
     @extend %column;
     flex: 1;
     position: relative;
+    min-width: 0px;
   }
 
   @at-root &__image {
