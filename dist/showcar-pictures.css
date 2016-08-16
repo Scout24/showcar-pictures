@@ -152,7 +152,7 @@
     cursor: pointer; }
   @media all and (min-width: 1025px) {
     .as24-pictures--fullscreen {
-      background-color: #000;
+      background-color: rgba(0, 0, 0, 0.95);
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -162,8 +162,6 @@
       left: 0;
       top: 0;
       z-index: 10000; }
-      .as24-pictures--fullscreen .as24-carousel-item {
-        background-color: #000; }
       .as24-pictures--fullscreen .as24-pictures__container, .as24-pictures--fullscreen .as24-pictures__wrapper {
         display: -webkit-box;
         display: -ms-flexbox;

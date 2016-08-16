@@ -59,7 +59,7 @@ $animationTime: .3s;
     transition: transform $animationTime;
     perspective: 1000px;
     transform: translate3d(0, 0, 0);
-    backface-visibility: hidden;;
+    backface-visibility: hidden;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -187,7 +187,7 @@ $animationTime: .3s;
 
   @at-root &--fullscreen {
     @include mqmin(1025px) {
-      background-color: #000;
+      background-color: rgba(0,0,0,.95);
       display: flex;
       position: fixed;
       width: 100%;
@@ -195,10 +195,6 @@ $animationTime: .3s;
       left: 0;
       top: 0;
       z-index: 10000;
-
-      .as24-carousel-item {
-        background-color: #000;
-      }
 
       .as24-pictures {
 
