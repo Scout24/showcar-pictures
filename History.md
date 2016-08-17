@@ -1,4 +1,9 @@
 
+1.3.4 / 2016-08-17
+==================
+
+  * Improved postcss config, changed positioning of elements in pictures
+
 1.3.2 / 2016-08-17
 ==================
 

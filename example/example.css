@@ -7,11 +7,12 @@ body {
 }
 
 .as24-pictures__slider .as24-carousel-item {
-  max-width: 100vw;
+  max-width: 100%;
 }
 
 .as24-pictures__slider .as24-carousel-container {
   height: 75vw;
+  padding-bottom: 75%;
 }
 
 @media (min-width: 640px) {
@@ -20,6 +21,7 @@ body {
   }
   .as24-pictures__slider .as24-carousel-container {
     height: 480px;
+    padding-bottom: 0;
   }
 }
 
