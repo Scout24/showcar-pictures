@@ -14,7 +14,6 @@ $animationTime: .3s;
   display: block;
   position: relative;
   overflow: hidden;
-  background: rgba(0,0,0,.95);
 
   &__header,
   &__info {
@@ -31,6 +30,12 @@ $animationTime: .3s;
     flex: 1;
     position: relative;
     min-width: 0px;
+  }
+
+  @at-root &__slider {
+    .as24-carousel-item {
+      background: rgba(0, 0, 0, .95);
+    }
   }
 
   @at-root &__image {

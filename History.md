@@ -1,4 +1,9 @@
 
+1.3.2 / 2016-08-17
+==================
+
+  * Fixed the background color of the carousel-item
+
 1.3.1 / 2016-08-17
 ==================
 

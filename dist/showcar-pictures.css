@@ -3,8 +3,7 @@
   width: 100%;
   display: block;
   position: relative;
-  overflow: hidden;
-  background: rgba(0, 0, 0, 0.95); }
+  overflow: hidden; }
   .as24-pictures__header, .as24-pictures__info {
     display: none; }
   .as24-pictures .no-transition {
@@ -23,6 +22,8 @@
             flex: 1;
     position: relative;
     min-width: 0px; }
+  .as24-pictures__slider .as24-carousel-item {
+    background: rgba(0, 0, 0, 0.95); }
   .as24-pictures__image {
     max-height: 100%;
     -o-object-fit: contain;
