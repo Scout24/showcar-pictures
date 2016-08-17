@@ -360,10 +360,10 @@ class Pictures {
     if(isFullScreen) return;
     let sliderSize = this.getElementSize(this.slider);
     // avoids the thumbnail view on small sizes
-    if(sliderSize.width <= 480){
-      this.setThumbnailMouseListeners(false);
-    } else {
+    if(window.document.body.clientWidth > 1024){
       this.setThumbnailMouseListeners(true);
+    } else {
+      this.setThumbnailMouseListeners(false);
     }
   }
 
