@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+}
+
+.car-info {
+  color: #fff;
+  margin-bottom: 32px;
+}
+
+.car-info svg rect,
+.car-info svg path,
+.car-info svg polygon {
+  fill: #fff;
+}
+
+.ads {
+  background: #ccc;
+}
+
+.as24-pictures__slider .as24-carousel-container {
+  height: 480px;
+}
+
+.as24-pictures__slider .as24-carousel-item {
+  max-width: 640px;
+}
+
+.ads {
+  height: 200px;
+  background: #ccc;
+}
