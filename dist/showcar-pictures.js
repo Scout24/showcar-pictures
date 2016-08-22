@@ -102,6 +102,15 @@ var Pictures = function () {
         dispatchEvent('as24-pictures.slide', data, this.element);
       }
     }.bind(this));
+
+    this.element.addEventListener('as24-carousel.tap', function (e) {
+      var data = void 0;
+      e.stopPropagation();
+      if (e.detail.role === "slider") {
+        data = extend({ fullscreen: this.fullScreenState }, e.detail);
+        dispatchEvent('as24-pictures.slider.tap', data, this.element);
+      }
+    }.bind(this));
   }
 
   /**

@@ -1,4 +1,10 @@
 
+1.3.5 / 2016-08-22
+==================
+
+  * added as24-pictures.slider.tap event
+  * added docs folder for github pages
+
 1.3.4 / 2016-08-17
 ==================
 

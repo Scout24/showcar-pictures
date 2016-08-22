@@ -186,8 +186,12 @@
   var _wrapper = document.getElementById('wrapper');
   _wrapper.addEventListener('as24-pictures.fullscreen', console.log.bind(console));
   _wrapper.addEventListener('as24-pictures.slide', console.log.bind(console));
+  _wrapper.addEventListener('as24-pictures.slider.tap', console.log.bind(console));
   _wrapper.addEventListener('as24-carousel.slide', function(e) {
-    console.log('from carousel', e);
+    console.log('slide from carousel', e);
+  });
+  _wrapper.addEventListener('as24-carousel.tap', function(e) {
+    console.log('tap from carousel', e);
   });
 </script>
 </body>

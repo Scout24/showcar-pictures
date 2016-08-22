@@ -93,6 +93,17 @@ For more information on styling have a look at the [showcar-carousel](https://gi
 
 The library triggers following custom events with `event.detail`:
 
+ * `as24-pictures.slider.tap` - when a user taps (or clicks) on a slider
+
+    ```js
+    {
+      fullscreen: true
+      id: ""
+      index: 4
+      role: "slider"
+    }
+    ```
+
  * `as24-pictures.fullscreen` - when fullscreen mode is toggled
 
    ```js
