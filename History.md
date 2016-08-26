@@ -1,4 +1,9 @@
 
+1.3.6 / 2016-08-26
+==================
+
+  * Fixed loading images (white square instead of an image)
+
 1.3.5 / 2016-08-22
 ==================
 

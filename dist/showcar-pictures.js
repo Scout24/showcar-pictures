@@ -194,7 +194,7 @@ var Pictures = function () {
         this.slider.goTo(index);
         this.slider.redraw(this.fullScreenState ? 'data-fullscreen-src' : 'data-src');
         this.thumbnails.goTo(index);
-        this.thumbnails.redraw();
+        this.thumbnails.redraw('data-src');
 
         removeClass('no-transition', this.container);
 
