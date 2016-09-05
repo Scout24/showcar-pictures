@@ -6,8 +6,7 @@
   overflow: hidden;
   background: rgba(0, 0, 0, 0.95); }
   .as24-pictures .as24-carousel__item {
-    cursor: pointer;
-    background: #fff; }
+    cursor: pointer; }
   .as24-pictures .as24-carousel__button {
     background-color: rgba(0, 0, 0, 0.4);
     height: 75px; }
