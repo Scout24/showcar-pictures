@@ -1,4 +1,14 @@
 
+2.0.1 / 2016-09-05
+==================
+
+  * Fixed docs and examples, fixed in css
+
+2.0.0 / 2016-09-05
+==================
+
+  * Put the new Carousel in use, refacotring.
+
 1.3.6 / 2016-08-26
 ==================
 

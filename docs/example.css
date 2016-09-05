@@ -2,6 +2,21 @@ body {
   margin: 0;
 }
 
+/* CUSTOMISATION */
+
+.as24-pictures__slider .as24-carousel__item {
+  width: 640px;
+  height: 480px;
+}
+
+.as24-pictures--fullscreen .as24-pictures__slider .as24-carousel__item {
+  height: auto;
+}
+
+
+
+/* THE REST, CUSTOM THINGS */
+
 .car-info {
   color: #fff;
   margin-bottom: 32px;
@@ -14,18 +29,21 @@ body {
 }
 
 .ads {
-  background: #ccc;
-}
-
-.as24-pictures__slider .as24-carousel-container {
-  height: 480px;
-}
-
-.as24-pictures__slider .as24-carousel-item {
-  max-width: 640px;
-}
-
-.ads {
   height: 200px;
   background: #ccc;
+}
+
+.gallery-picture {
+  flex: 1;
+  position: relative;
+  height: 100%;
+}
+
+.gallery-picture__image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  max-width: 100%;
+  max-height: 100%;
 }

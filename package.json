@@ -1,6 +1,6 @@
 {
   "name": "showcar-pictures",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A simple gallery component that works hand in hand with the showcar-carousel",
   "main": "dist/showcar-pictures.min.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "build:cleancss": "cleancss --source-map -o $npm_package_config_dist.min.css $npm_package_config_dist.css",
     "build": "npm run build:js && npm run build:css",
     "build:clean": "rimraf dist",
-    "postbuild": "echo 'Build succeeded!'",
+    "postbuild": "npm run docs && echo 'Build succeeded!'",
     "prod": "npm run build",
     "watch:server": "nodemon --ignore dist --ignore src --ignore node_modules ./example/server.js",
     "watch:sass": "node-sass -w ./src/ -o ./dist/ --importer ./importer.sass.js",
@@ -26,6 +26,7 @@
     "prewatch": "echo 'Starting watchers'",
     "watch": "npm run watch:sass & npm run watch:postcss & npm run watch:babel & npm run watch:server & npm run watch:browser",
     "dev": "npm run build && npm run watch",
+    "docs": "cp -rf ./node_modules/showcar-carousel/dist/showcar-carousel.min.* ./docs && cp -rf ./dist/showcar-pictures.min.* ./docs",
     "version:major": "npm version major",
     "version:minor": "npm version minor",
     "version:patch": "npm version patch",

@@ -44,6 +44,7 @@ $animationTime: .3s;
 
   .as24-carousel__item {
     cursor: pointer;
+    background: #fff;
   }
 
   .as24-carousel__button {
@@ -128,16 +129,13 @@ $animationTime: .3s;
       margin-right: 2px;
       cursor: pointer;
 
-      &:after {
+      &.active:after {
         position: absolute;
         content: '';
         top: -2px;
         left: -2px;
-        width: calc(100% + 4px);
-        height: calc(100% + 4px);
-      }
-
-      &.active:after {
+        right: -2px;
+        bottom: -2px;
         border: 2px solid #ff7500;
       }
 
@@ -200,8 +198,7 @@ $animationTime: .3s;
         &__container {
           display: flex;
           flex-direction: column;
-          height: 100%;
-          width: 100%;
+          flex: 1;
           padding: $XXL;
         }
 

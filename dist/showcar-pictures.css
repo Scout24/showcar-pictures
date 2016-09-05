@@ -6,7 +6,8 @@
   overflow: hidden;
   background: rgba(0, 0, 0, 0.95); }
   .as24-pictures .as24-carousel__item {
-    cursor: pointer; }
+    cursor: pointer;
+    background: #fff; }
   .as24-pictures .as24-carousel__button {
     background-color: rgba(0, 0, 0, 0.4);
     height: 75px; }
@@ -88,14 +89,13 @@
       margin-left: 2px;
       margin-right: 2px;
       cursor: pointer; }
-      .as24-pictures__thumbnails .as24-carousel__item:after {
+      .as24-pictures__thumbnails .as24-carousel__item.active:after {
         position: absolute;
         content: '';
         top: -2px;
         left: -2px;
-        width: calc(100% + 4px);
-        height: calc(100% + 4px); }
-      .as24-pictures__thumbnails .as24-carousel__item.active:after {
+        right: -2px;
+        bottom: -2px;
         border: 2px solid #ff7500; }
     .as24-pictures__thumbnails .as24-carousel__button {
       width: 40px;
@@ -160,8 +160,9 @@
         -webkit-box-direction: normal;
             -ms-flex-direction: column;
                 flex-direction: column;
-        height: 100%;
-        width: 100%;
+        -webkit-box-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
         padding: 28px; }
       .as24-pictures--fullscreen .as24-pictures__content {
         display: -webkit-box;

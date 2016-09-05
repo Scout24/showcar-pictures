@@ -2,41 +2,20 @@ body {
   margin: 0;
 }
 
-#wrapper {
-  max-width: 640px;
-}
+/* CUSTOMISATION */
 
 .as24-pictures__slider .as24-carousel__item {
-  width: 100vw;
-  position: relative;
+  width: 640px;
+  height: 480px;
 }
 
-.as24-pictures__slider .as24-carousel__container {
-  height: 75vw;
+.as24-pictures--fullscreen .as24-pictures__slider .as24-carousel__item {
+  height: auto;
 }
 
-@media (min-width: 640px) {
-  .as24-pictures__slider .as24-carousel__item {
-    max-width: 640px;
-  }
-  .as24-pictures__slider .as24-carousel__container {
-    height: 480px;
-  }
 
-}
 
-.gallery-picture {
-  position: relative;
-  flex: 1;
-}
-.gallery-picture__image {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  max-width: 100%;
-  max-height: 100%;
-}
+/* THE REST, CUSTOM THINGS */
 
 .car-info {
   color: #fff;
@@ -50,30 +29,21 @@ body {
 }
 
 .ads {
-  background: #ccc;
-}
-
-.ads {
   height: 200px;
   background: #ccc;
 }
 
-.w {
-  display: flex;
-  flex-direction: column;
-  max-width: 1100px;
+.gallery-picture {
+  flex: 1;
+  position: relative;
+  height: 100%;
 }
 
-@media (min-width: 1024px) {
-  .w {
-    flex-direction: row;
-  }
-}
-
-.lp {
-  flex: 1 0 60%;
-}
-
-.rp {
-  flex: 1 0 40%;
+.gallery-picture__image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  max-width: 100%;
+  max-height: 100%;
 }

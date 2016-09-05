@@ -90,22 +90,15 @@ See the following example below:
 As to styles, you only have to specify these:
 
 ```css
-#my-pics .as24-pictures__slider .as24-carousel__container {
+#my-pics .as24-pictures__slider .as24-carousel__item {
+  width: 640px;
   height: 480px;
 }
-```
 
-This one to know what is the height of the slider (and images as a result). As it might depend on a particular situation, we cannot fix it.
-
-```css
-#my-pics .as24-pictures__slider .as24-carousel__item {
-  max-width: 640px;
+#my-pics .as24-pictures--fullscreen .as24-pictures__slider .as24-carousel__item {
+  height: auto;
 }
 ```
-
-As we also need to know the maximal width of the an image in the slider.
-
-For more information on styling have a look at the [showcar-carousel](https://github.com/AutoScout24/showcar-carousel) documentation.
 
 #### Custom Events
 
