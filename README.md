@@ -145,12 +145,10 @@ Afterwards you need to add some css and js to your page.
 
 ```html
 <link rel="stylesheet" href="../dist/showcar-pictures.css">
-<link rel="stylesheet" href="../dist/showcar-carousel.css">
 ```
 
 ```html
 <script src="../dist/showcar-carousel.js"></script>
-<script src="../dist/showcar-pictures.js"></script>
 ```
 
 *Note: The showcar-pictures depends on the [showcar-carousel](https://github.com/AutoScout24/showcar-carousel) component.*

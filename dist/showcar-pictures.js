@@ -119,6 +119,7 @@ var Pictures = function () {
       } else {
         removeClass('as24-pictures--fullscreen', this.element);
       }
+      dispatchEvent('as24-pictures.fullscreen', { fullscreen: this.fullScreenState }, this.element);
       if (this.thumbnails) this.thumbnails.redraw();
       if (this.slider) this.slider.redraw();
     }
