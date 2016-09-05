@@ -28,39 +28,57 @@ See the following example below:
 ```html
 <div id="my-pics">
   <as24-pictures class="as24-pictures">
-    <div class="as24-pictures__header">
-      <div class="as24-pictures__header-line">
-        <h2 class="as24-pictures__picture-title">Car name</h2>
-        <i class="as24-pictures__fullscreen-close">Schließen</i>
+    <div class="as24-pictures__container">
+
+      <!-- Header -->
+      <div class="as24-pictures__header">
+        <div class="as24-pictures__header-line">
+          <h2 class="as24-pictures__picture-title"><!-- The main title of the gallery --></h2>
+          <i class="as24-pictures__fullscreen-close"><!-- close button text --></i>
+        </div>
+        <div class="as24-pictures__header-line">
+          <h5 class="as24-pictures__picture-subtitle"><!-- The secondary title of the gallery --></h5>
+        </div>
       </div>
-      <div class="as24-pictures__header-line">
-        <h5 class="as24-pictures__picture-subtitle">Car short info</h5>
+      <!-- / Header -->
+
+      <div class="as24-pictures__content">
+        <div class="as24-pictures__slider-container">
+
+          <!-- Slider -->
+          <as24-carousel class="as24-pictures__slider" role="slider" loop="infinite">
+            <div class="as24-carousel__container" role="container">
+              <div class="as24-carousel__item">
+                <!-- the content of a slider item -->
+              </div>
+            </div>
+            <a href="#" class="as24-carousel__button" role="nav-button" data-direction="left"></a>
+            <a href="#" class="as24-carousel__button" role="nav-button" data-direction="right"></a>
+            <div class="as24-carousel__indicator" role="indicator">2/7</div>
+          </as24-carousel>
+          <!-- / Slider -->
+
+          <!-- Thumbnails -->
+          <as24-carousel role="thumbnails" class="as24-pictures__thumbnails">
+            <div class="as24-carousel__container" role="container">
+              <div class="as24-carousel__item">
+                <!-- the content of a thumb item -->
+              </div>
+            </div>
+            <a href="#" class="as24-carousel__button as24-carousel__button--hidden" role="nav-button" data-direction="left"></a>
+            <a href="#" class="as24-carousel__button" role="nav-button" data-direction="right"></a>
+          </as24-carousel>
+          <!-- / Thumbnails -->
+
+        </div>
+
+        <!-- Additional info -->
+        <aside class="as24-pictures__info">
+          <!-- description, ads, whatever -->
+        </aside>
+        <!-- / Additional info -->
+
       </div>
-    </div>
-    <div class="as24-pictures__content">
-      <div class="as24-pictures__slider-container">
-        <as24-carousel class="as24-pictures__slider" role="slider" mode="slider" gap="0" preview="false" indicator="true">
-          <div class="as24-carousel-item">
-              <img class="as24-pictures__image"
-                   data-src="..."
-                   data-fullscreen-src="..."
-                   src=""
-                   alt="">
-          </div>
-        </as24-carousel>
-        <as24-carousel role="thumbnails" class="as24-pictures__thumbnails" gap="4">
-          <div class="as24-carousel-item">
-            <img data-src="..."
-                 src=""
-                 alt="">
-          </div>
-        </as24-carousel>
-      </div>
-      <aside class="as24-pictures__info">
-        <!-- custom car info -->
-        <!-- ads -->
-        <!-- whatever else -->
-      </aside>
     </div>
   </as24-pictures>
 </div>
@@ -72,7 +90,7 @@ See the following example below:
 As to styles, you only have to specify these:
 
 ```css
-#my-pics .as24-pictures__slider .as24-carousel-container {
+#my-pics .as24-pictures__slider .as24-carousel__container {
   height: 480px;
 }
 ```
@@ -80,7 +98,7 @@ As to styles, you only have to specify these:
 This one to know what is the height of the slider (and images as a result). As it might depend on a particular situation, we cannot fix it.
 
 ```css
-#my-pics .as24-pictures__slider .as24-carousel-item {
+#my-pics .as24-pictures__slider .as24-carousel__item {
   max-width: 640px;
 }
 ```
@@ -92,17 +110,6 @@ For more information on styling have a look at the [showcar-carousel](https://gi
 #### Custom Events
 
 The library triggers following custom events with `event.detail`:
-
- * `as24-pictures.slider.tap` - when a user taps (or clicks) on a slider
-
-    ```js
-    {
-      fullscreen: true
-      id: ""
-      index: 4
-      role: "slider"
-    }
-    ```
 
  * `as24-pictures.fullscreen` - when fullscreen mode is toggled
 

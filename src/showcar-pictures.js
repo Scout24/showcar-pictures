@@ -1,62 +1,15 @@
-/**
- * Add a class to the given DOM element.
- * @param {string} className
- * @param {HTMLElement} element
- * @returns {HTMLElement}
- * ToDo: v3 -> Move to ui utils library.
- */
 function addClass(className, element) {
-  if (!element.getAttribute) return element;
-
-  let classList = [], classesString = element.getAttribute('class');
-  if (classesString) {
-    classList = classesString.split(' ');
-    if (classList.indexOf(className) === -1) {
-      classesString = classList.concat(className).join(' ');
-    }
-  } else {
-    classesString = className
-  }
-  element.setAttribute('class', classesString);
+  element.classList.add(className)
   return element;
 }
 
-/**
- * Remove a class from the given DOM element.
- * @param {string} className
- * @param {HTMLElement} element
- * @returns {HTMLElement}
- * ToDo: v3 -> Move to ui utils library.
- */
 function removeClass(className, element) {
-  if (!element.getAttribute) return element;
-
-  let classList = [], classesString = element.getAttribute('class');
-  if (classesString) {
-    classList = classesString.split(' ');
-    if(classList.indexOf(className) !== -1){
-      classList.splice(classList.indexOf(className), 1);
-    }
-    element.setAttribute('class', classList.join(' '));
-  }
+  element.classList.remove(className);
   return element;
 }
 
-/**
- * Check if the given DOM element has a class.
- * @param {string} className
- * @param {HTMLElement} element
- * @returns {boolean}
- * ToDo: v3 -> Move to ui utils library.
- */
 function containsClass(className, element) {
-  if (!element.getAttribute) return false;
-
-  let classList = [], classesString = element.getAttribute('class');
-  if (classesString) {
-    classList = classesString.split(' ');
-  }
-  return classList.indexOf(className) > -1;
+  return element.classList.contains(className);
 }
 
 function dispatchEvent(evtName, payload, element) {
@@ -65,11 +18,15 @@ function dispatchEvent(evtName, payload, element) {
   return element;
 }
 
-function extend(dst, src) {
-  for (var k in src) {
-    dst[k] = src[k];
+function merge(src1, src2) {
+  var res = {};
+  for (var k in src1) {
+    res[k] = src1[k];
   }
-  return dst;
+  for (var k in src2) {
+    res[k] = src2[k];
+  }
+  return res;
 }
 
 // ToDo: Load larger images (data-src-large?)
@@ -78,7 +35,6 @@ class Pictures {
   /** @constructor */
   constructor(element) {
     this.element = element;
-    this.resizeListener = null;
     this.thumbnailsVisible = false;
     this.fullScreenState = false;
 
@@ -86,17 +42,8 @@ class Pictures {
       let data;
       e.stopPropagation();
       if (e.detail.role === "slider") {
-        data = extend({ fullscreen:this.fullScreenState }, e.detail);
+        data = merge({ fullscreen: this.fullScreenState }, e.detail);
         dispatchEvent('as24-pictures.slide', data, this.element);
-      }
-    }.bind(this));
-
-    this.element.addEventListener('as24-carousel.tap', function(e) {
-      let data;
-      e.stopPropagation();
-      if (e.detail.role === "slider") {
-        data = extend({ fullscreen:this.fullScreenState }, e.detail);
-        dispatchEvent('as24-pictures.slider.tap', data, this.element);
       }
     }.bind(this));
   }
@@ -104,14 +51,14 @@ class Pictures {
   /**
    * Adds all handlers for the thumbnails carousel.
    */
-  addThumbnails() {
-    this.thumbnailsItems = this.thumbnails.querySelectorAll('.as24-carousel-item');
+  initThumbnails() {
+    this.thumbnailsItems = this.thumbnails.querySelectorAll('.as24-carousel__item');
     if(!this.thumbnailsItems) return;
     addClass('active', this.thumbnailsItems[0]);
-    [].forEach.call(this.thumbnailsItems, (element, index) => {
-      element.addEventListener('click', e => {
+    [].forEach.call(this.thumbnailsItems, (el, idx) => {
+      el.addEventListener('click', e => {
         e.preventDefault();
-        this.slider.goTo(index);
+        this.slider.goTo(idx+1);
       })
     });
   }
@@ -122,14 +69,13 @@ class Pictures {
   addSlider() {
     this.slider.addEventListener('as24-carousel.slide', e => {
       let index = e.detail.index;
-      let goTo = index > this.thumbnails.getStepLength() ? this.thumbnails.getStepLength() : index;
 
       switch(e.detail.role) {
         case 'slider':
-          this.thumbnails.goTo(goTo);
+          this.thumbnails.goTo(index);
           break;
         case 'thumbnails':
-          this.slider.goTo(goTo);
+          this.slider.goTo(index);
           break;
       }
 
@@ -140,38 +86,16 @@ class Pictures {
 
   /**
    * Set the full screen state.
-   * @param {Boolean} state - the full screen state.
    */
-  setFullScreenState(state){
-    if (this.fullScreenState === state) return;
-
-    this.fullScreenState = state;
-
-    let index = parseInt(this.slider.getIndex());
-
+  toggleFullScreen() {
+    this.fullScreenState = !this.fullScreenState;
     if(this.fullScreenState) {
       addClass('as24-pictures--fullscreen', this.element);
     } else {
       removeClass('as24-pictures--fullscreen', this.element);
     }
-
-    dispatchEvent('as24-pictures.fullscreen', { fullscreen: this.fullScreenState }, this.element);
-
-    window.setTimeout(function() {
-      this.slider.setAttribute('preview', String(!this.fullScreenState));
-      this.setThumbnailMouseListeners(!this.fullScreenState);
-
-      addClass('no-transition', this.container);
-
-      this.slider.goTo(index);
-      this.slider.redraw(this.fullScreenState ? 'data-fullscreen-src' : 'data-src');
-      this.thumbnails.goTo(index);
-      this.thumbnails.redraw('data-src');
-
-      removeClass('no-transition', this.container);
-
-      this.redraw();
-    }.bind(this));
+    if (this.thumbnails) this.thumbnails.redraw();
+    if (this.slider) this.slider.redraw();
   }
 
   /**
@@ -179,26 +103,14 @@ class Pictures {
    * {Event} event - the click event.
    */
   fullScreenOpenHandler(event) {
-    event.preventDefault();
-
-    if(window.innerWidth <= 1024) {
-      return;
-    }
-
-    const target = event.target || event.srcElement;
-    if(!this.fullScreenState && target.nodeName.toLowerCase() === 'img') {
-      this.setFullScreenState(true);
+    if(!this.fullScreenState && event.target.nodeName.toLowerCase() === 'img') {
+      this.toggleFullScreen();
     }
   }
 
   fullScreenCloseHandler(event) {
-    event.preventDefault();
-    const target = event.target || event.srcElement;
-
-    if(this.fullScreenState) {
-      if(target.nodeName.toLowerCase() === 'as24-pictures' || target.classList.contains('as24-pictures__fullscreen-close')) {
-        this.setFullScreenState(false);
-      }
+    if(this.fullScreenState && containsClass('as24-pictures__fullscreen-close', event.target)) {
+      this.toggleFullScreen();
     }
   }
 
@@ -209,21 +121,16 @@ class Pictures {
     this.addContainer();
 
     // Slider
-    this.slider = this.element.querySelector('.as24-pictures__slider');
+    this.slider = this.element.querySelector('[role=slider]');
     if(this.slider) {
       this.addSlider();
+      this.fullScreenOpenListener = this.fullScreenOpenHandler.bind(this);
+      this.slider.addEventListener('click', this.fullScreenOpenListener);
     }
 
     // Thumbnails
     this.thumbnails = this.element.querySelector('.as24-pictures__thumbnails');
-    if (this.thumbnails) this.addThumbnails();
-
-    // FullScreen
-    this.fullScreen = this.element.querySelector('.as24-pictures as24-carousel');
-    if (this.fullScreen) {
-      this.fullScreenOpenListener = this.fullScreenOpenHandler.bind(this);
-      this.fullScreen.addEventListener('click', this.fullScreenOpenListener);
-    }
+    if (this.thumbnails) this.initThumbnails();
 
     this.fullScreenCloseListener = this.fullScreenCloseHandler.bind(this);
     this.element.addEventListener('click', this.fullScreenCloseListener);
@@ -232,22 +139,12 @@ class Pictures {
     if (this.closeButton) {
       this.closeButton.addEventListener('click', this.fullScreenCloseListener);
     }
-
-    this.resizeListener = this.resizeTimeoutHandler.bind(this);
-
-    // Add Listeners.
-    window.addEventListener('resize', this.resizeListener, true);
-    this.setThumbnailMouseListeners(true);
-
-    this.redraw();
   }
 
   /**
    * Cleans up the pictures component by removing listeners and dom elements.
    */
   detached(){
-    window.removeEventListener('resize', this.resizeListener, true);
-    this.setThumbnailMouseListeners(false);
 
     this.fullScreen = this.element.querySelector('as24-pictures as24-carousel');
     if(this.fullScreen) {
@@ -265,37 +162,13 @@ class Pictures {
   }
 
   /**
-   * Add or remove thumbnail mouse listeners
-   * @param {Boolean} state - the state of the listeners
-   */
-  setThumbnailMouseListeners(state){
-    this.sliderContainer = this.element.querySelector('.as24-pictures__slider-container');
-    if(state){
-      this.setThumbnailMouseListeners(false);
-      this.mouseEnterListener = this.mouseEnterHandler.bind(this);
-      this.mouseLeaveListener = this.mouseLeaveHandler.bind(this);
-      this.sliderContainer.addEventListener('mouseover', this.mouseEnterListener, true);
-      this.sliderContainer.addEventListener('mouseleave', this.mouseLeaveListener, true);
-    } else {
-      this.sliderContainer.removeEventListener('mouseover', this.mouseEnterListener,  true);
-      this.sliderContainer.removeEventListener('mouseleave', this.mouseLeaveListener, true);
-      this.setThumbnailVisibility(false);
-    }
-  }
-
-  /**
    * Wraps all the pictures items in a container.
    */
   addContainer() {
-
-    if (containsClass('as24-pictures__wrapper', this.element.firstChild)){
-      this.wrapper = this.element.querySelector('.as24-pictures__wrapper');
+    if (containsClass('as24-pictures__wrapper', this.element.children[0])){
       this.container = this.element.querySelector('.as24-pictures__container');
       return;
     }
-
-    this.wrapper = document.createElement('div');
-    addClass('as24-pictures__wrapper', this.wrapper);
 
     this.container = document.createElement('div');
     addClass('as24-pictures__container', this.container);
@@ -305,9 +178,8 @@ class Pictures {
       this.container.appendChild(item);
     });
 
-    this.wrapper.appendChild(this.container);
     this.element.innerHTML = '';
-    this.element.appendChild(this.wrapper);
+    this.element.appendChild(this.container);
   }
 
   /**
@@ -318,112 +190,8 @@ class Pictures {
       this.container.removeChild(element);
     });
     this.wrapper.removeChild(this.container);
-    this.element.removeChild(this.wrapper);
   }
 
-  /**
-   * Mouse move handler for the thumbnail visibility state.
-   */
-  mouseEnterHandler(event){
-    const target = event.target || event.srcElement;
-    const paginationButtons = this.slider.querySelectorAll('.as24-pagination-button');
-    if(paginationButtons && (target == paginationButtons[0] || target == paginationButtons[1])) {
-      event.stopPropagation();
-      this.setThumbnailVisibility(false);
-      return;
-    }
-    this.setThumbnailVisibility(true);
-  }
-
-  /**
-   * Mouse leave handler for the thumbnail visibility state.
-   */
-  mouseLeaveHandler(){
-    this.setThumbnailVisibility(false);
-  }
-
-  /**
-   * Animates the thumbnail view position according its state.
-   * {Boolean} state - the thumbnail component visibility state.
-   */
-  setThumbnailVisibility(state = false){
-    if (!this.thumbnails || this.thumbnailsVisible === state) return;
-
-    this.thumbnailsVisible = state;
-    const indicator = this.element.querySelector('.as24-pagination-indicator');
-    const thumbsVisibilityModifier = 'as24-pictures__thumbnails--visible';
-    const indicatorVisibilityModifier = 'as24-pagination-indicator--upped';
-
-    state ? addClass(thumbsVisibilityModifier, this.thumbnails) : removeClass(thumbsVisibilityModifier, this.thumbnails);
-    if (indicator) {
-      state ? addClass(indicatorVisibilityModifier, indicator) : removeClass(indicatorVisibilityModifier, indicator);
-    }
-  }
-
-  /**
-   * Takes care of the pictures sizing.
-   * @public
-   */
-  redraw() {
-    let isFullScreen = containsClass('as24-pictures--fullscreen', this.element);
-    if(isFullScreen) return;
-    let sliderSize = this.getElementSize(this.slider);
-    // avoids the thumbnail view on small sizes
-    if(window.document.body.clientWidth > 1024){
-      this.setThumbnailMouseListeners(true);
-    } else {
-      this.setThumbnailMouseListeners(false);
-    }
-  }
-
-  /**
-   * Checks if the window width has changed and starts the redraw process.
-   */
-  resizeHandler() {
-    let currentWindowWidth = this.getWindowWidth();
-    if (this.windowWidth !== currentWindowWidth) {
-      this.windowWidth = currentWindowWidth;
-      this.redraw();
-    }
-  }
-
-  /**
-   * Resize timeout call blocker.
-   */
-  resizeTimeoutHandler(){
-    // ToDo: v3 -> Uncomment the following two lines and remove the last one if there is a need for an resize maniac execution blocker.
-    // clearTimeout(this.resizeTimeout);
-    // this.resizeTimeout = setTimeout(this.resizeHandler.bind(this), 300);
-    this.resizeHandler();
-  }
-
-  /**
-   * gets the current client height.
-   * @returns {Number} the width.
-   */
-  getWindowWidth() {
-    return window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-  }
-
-  /**
-   * Get the element width and height without padding.
-   * @param {HTMLElement} element - the element from whom to get the width and height off.
-   * @return {Object}
-   */
-  getElementSize(element = this.element) {
-    let computed = getComputedStyle(element);
-
-    let width = element.offsetWidth;
-    width -= parseFloat(computed.paddingLeft) + parseFloat(computed.paddingRight);
-
-    let height = element.offsetHeight;
-    height -= parseFloat(computed.paddingTop) + parseFloat(computed.paddingBottom);
-
-    return {
-      width: width,
-      height: height
-    };
-  }
 }
 
 
