@@ -1,26 +1,35 @@
-$componentBGColor: rgba(0, 0, 0, .95);
-$controllsBGColor: rgba(0, 0, 0, .4);
-$thumbsPadding: 7px 0px;
-$thumbWidth: 100px;
-$thumbsHeight: (($thumbWidth * 75) / 100) + 14;
+@import 'npm:showcar-ui/src/scss/mixins/fonts.scss';
+@import 'npm:showcar-ui/src/scss/mixins/utils.scss';
+@import 'npm:showcar-ui/src/scss/variables.scss';
 
-$animationTime: .3s;
+$component-bg-color: rgba(0, 0, 0, .95);
+$controlls-bg-color: rgba(0, 0, 0, .4);
+$thumbs-padding: 7px 0;
+$thumb-width: 100px;
+$thumbs-height: (($thumb-width * 75) / 100) + 14;
 
-@import "npm:showcar-ui/src/scss/mixins/fonts.scss";
-@import "npm:showcar-ui/src/scss/mixins/utils.scss";
-@import "npm:showcar-ui/src/scss/variables.scss";
+$title-text-colour: #fff;
 
-@mixin xButton {
+$active-thumb-border: #ff7500;
+
+$fullscreen-container-padding: $XXL;
+$headeing-margin: $XL;
+
+$button-colour: #fff;
+
+$animation-time: .3s;
+
+@mixin x-button {
   &:after,
   &:before {
+    border-top: solid 2px $button-colour;
     content: '';
     display: block;
-    width: 27px;
     height: 0;
-    position: absolute;
     left: 0;
+    position: absolute;
     top: 0;
-    border-top: solid 2px #fff;
+    width: 27px;
   }
 
   &:before {
@@ -33,12 +42,12 @@ $animationTime: .3s;
 }
 
 .as24-pictures {
+  background: $component-bg-color;
   box-sizing: border-box;
-  width: 100%;
   display: block;
-  position: relative;
   overflow: hidden;
-  background: $componentBGColor;
+  position: relative;
+  width: 100%;
 
   // Customisations
 
@@ -47,34 +56,37 @@ $animationTime: .3s;
   }
 
   .as24-carousel__button {
-    background-color: $controllsBGColor;
+    background-color: $controlls-bg-color;
     height: 75px;
 
-    &[data-direction="left"] {
+    &[data-direction='left'] {
       left: 0;
     }
 
-    &[data-direction="right"] {
+    &[data-direction='right'] {
       right: 0;
     }
 
   }
 
   .as24-carousel__indicator {
-    background: $controllsBGColor;
-    transition: transform $animationTime;
-    transform: translate3d(0, 0, 0);
-    will-change: transform;
+    background: $controlls-bg-color;
     bottom: 0;
+    transform: translate3d(0, 0, 0);
+    transition: transform $animation-time;
+    will-change: transform;
   }
 
   &:hover {
+
     .as24-pictures__thumbnails {
       transform: translate3d(0, 0, 0);
     }
+
     .as24-carousel__indicator {
-      transform: translate3d(0, -$thumbsHeight, 0) !important;
+      transform: translate3d(0, -$thumbs-height, 0) !important;
     }
+
   }
 
   &__header,
@@ -84,109 +96,102 @@ $animationTime: .3s;
 
   @at-root &__slider-container {
     display: flex;
-    flex-direction: column;
     flex: 1;
+    flex-direction: column;
+    min-width: 0;
     position: relative;
-    min-width: 0px;
   }
 
   @at-root &__thumbnails {
-    transition: transform $animationTime;
-    perspective: 1000px;
     backface-visibility: hidden;
-    position: absolute;
+    background: $controlls-bg-color;
     bottom: 0;
     left: 0;
-    padding: $thumbsPadding;
-    width: 100%;
-    background: $controllsBGColor;
+    padding: $thumbs-padding;
+    perspective: 1000px;
+    position: absolute;
     transform: translate3d(0, 100%, 0);
-
-    .as24-carousel__button {
-      width: 35px;
-      height: 75px;
-
-      &[data-direction="left"] {
-        left: 0;
-      }
-
-      &[data-direction="right"] {
-        right: 0;
-      }
-
-    }
+    transition: transform $animation-time;
+    width: 100%;
 
     .as24-carousel__item {
-      width: $thumbWidth;
-      height: 75px;
-      flex: 0 0 $thumbWidth;
-      display: flex;
-      justify-content: center;
       align-items: center;
-      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex: 0 0 $thumb-width;
+      height: 75px;
+      justify-content: center;
       margin-left: 2px;
       margin-right: 2px;
-      cursor: pointer;
+      position: relative;
+      width: $thumb-width;
 
-      &.active:after {
-        position: absolute;
-        content: '';
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        border: 2px solid #ff7500;
+      &.active {
+        &:after {
+          border: 2px solid $active-thumb-border;
+          bottom: -2px;
+          content: '';
+          left: -2px;
+          position: absolute;
+          right: -2px;
+          top: -2px;
+        }
       }
 
     }
 
     .as24-carousel__button {
-      width: 40px;
       height: 100%;
+      width: 40px;
 
-      &[data-direction="right"]{
+      &[data-direction='right'] {
         right: 0;
       }
-      &[data-direction="left"]{
+
+      &[data-direction='left'] {
         left: 0;
       }
 
       &.as24-carousel__button--hidden {
-        &[data-direction="right"]{
+
+        &[data-direction='right'] {
           transform: translate3d(100%, 0, 0);
         }
-        &[data-direction="left"]{
+
+        &[data-direction='left'] {
           transform: translate3d(-100%, 0, 0);
         }
+
       }
     }
 
   }
 
   @at-root &__fullscreen-close {
-    cursor: pointer;
-    color: #fff;
+    @include x-button();
     align-items: center;
-    padding: 1px 0 0 35px;
+    color: $button-colour;
+    cursor: pointer;
     margin: 12px 0 0 30px;
+    padding: 1px 0 0 35px;
     position: relative;
-    @include xButton();
   }
 
   @at-root &--fullscreen {
     @include mqmin(1025px) {
       display: flex;
-      position: fixed;
-      width: 100%;
       height: 100%;
       left: 0;
+      position: fixed;
       top: 0;
+      width: 100%;
       z-index: 10000;
 
       &:hover {
         .as24-pictures__thumbnails {
           transform: translate3d(0, 0, 0);
         }
+
         .as24-carousel__indicator {
           transform: translate3d(0, 0, 0) !important;
         }
@@ -196,9 +201,9 @@ $animationTime: .3s;
 
         &__container {
           display: flex;
-          flex-direction: column;
           flex: 1;
-          padding: $XXL;
+          flex-direction: column;
+          padding: $fullscreen-container-padding;
         }
 
         &__content {
@@ -209,7 +214,7 @@ $animationTime: .3s;
         &__header {
           display: flex;
           flex-direction: column;
-          margin-bottom: $XL;
+          margin-bottom: $headeing-margin;
 
           &-line {
             display: flex;
@@ -219,7 +224,7 @@ $animationTime: .3s;
 
         &__picture-title,
         &__picture-subtitle {
-          color: white;
+          color: $title-text-colour;
         }
 
         &__picture-title {
@@ -247,10 +252,10 @@ $animationTime: .3s;
         }
 
         &__thumbnails {
-          position: relative;
           background: none;
-          transform: translate3d(0, 0, 0);
           flex: 0 0 auto;
+          position: relative;
+          transform: translate3d(0, 0, 0);
 
           .as24-carousel__container {
             display: flex;
@@ -266,8 +271,8 @@ $animationTime: .3s;
 
         &__info {
           display: flex;
-          flex-direction: column;
           flex: 0 0 330px;
+          flex-direction: column;
           margin-left: 16px;
         }
 

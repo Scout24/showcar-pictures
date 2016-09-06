@@ -1,13 +1,31 @@
+/**
+ * Adds class to the dom element
+ * @param {string} className  The class that has to be added
+ * @param {Element} element   The element to add a class to
+ * @return {Element}          the element to which the class has been added
+ */
 function addClass(className, element) {
   element.classList.add(className)
   return element;
 }
 
+/**
+ * Removed class from the dom element
+ * @param  {string} className class to be removed
+ * @param  {Element} element   the element to remove class from
+ * @return {Element}           the element from which the class has been removed
+ */
 function removeClass(className, element) {
   element.classList.remove(className);
   return element;
 }
 
+/**
+ * checks whether an element has a class
+ * @param  {string} className class to be removed
+ * @param  {Element} element   the element to remove class from
+ * @return {Boolean}
+ */
 function containsClass(className, element) {
   return element.classList.contains(className);
 }
@@ -29,13 +47,26 @@ function merge(src1, src2) {
   return res;
 }
 
-// ToDo: Load larger images (data-src-large?)
 class Pictures {
 
   /** @constructor */
   constructor(element) {
+    /**
+     * The root element
+     * @type {Element}
+     */
     this.element = element;
+
+    /**
+     * Thether the thumbnail are visible on not
+     * @type {Boolean}
+     */
     this.thumbnailsVisible = false;
+
+    /**
+     * The current state of the screen
+     * @type {Boolean}
+     */
     this.fullScreenState = false;
 
     this.element.addEventListener('as24-carousel.slide', function(e) {
@@ -49,10 +80,11 @@ class Pictures {
   }
 
   /**
-   * Adds all handlers for the thumbnails carousel.
+   * Does init for thumbnails
    */
   initThumbnails() {
     this.thumbnailsItems = this.thumbnails.querySelectorAll('.as24-carousel__item');
+
     if(!this.thumbnailsItems) return;
     addClass('active', this.thumbnailsItems[0]);
     [].forEach.call(this.thumbnailsItems, (el, idx) => {
