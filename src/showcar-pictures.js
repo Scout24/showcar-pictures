@@ -36,6 +36,19 @@ function dispatchEvent(evtName, payload, element) {
   return element;
 }
 
+/**
+ * Gets parent el by class name
+ * @param  {string} className
+ * @param  {Element} element
+ * @return {Boolean}
+ */
+function getParentByClassName(className, element) {
+  while(element && !containsClass(className, element)) {
+    element = element.parentNode;
+  }
+  return element;
+}
+
 function merge(src1, src2) {
   var res = {};
   for (var k in src1) {
@@ -87,11 +100,11 @@ class Pictures {
 
     if(!this.thumbnailsItems) return;
     addClass('active', this.thumbnailsItems[0]);
-    [].forEach.call(this.thumbnailsItems, (el, idx) => {
-      el.addEventListener('click', e => {
-        e.preventDefault();
-        this.slider.goTo(idx+1);
-      })
+
+    this.thumbnails.addEventListener('click', (evt) => {
+      evt.preventDefault();
+      const idx = Array.from(this.thumbnails.querySelectorAll('.as24-carousel__item')).indexOf(getParentByClassName('as24-carousel__item', evt.target));
+      if (idx >= 0) this.slider.goTo(idx + 1);
     });
   }
 
@@ -219,10 +232,23 @@ class Pictures {
    * Removes the container.
    */
   removeContainer() {
-    [].forEach.call(this.container.children, element => {
-      this.container.removeChild(element);
-    });
+    Array.from(this.container.children).forEach(element => this.container.removeChild(element));
     this.wrapper.removeChild(this.container);
+  }
+
+  /**
+   * Self-explanatory
+   * @param {number} slideIndex  Self-explanatory
+   * @return {void}
+   */
+  removeSlide(slideIndex) {
+    if (slideIndex > this.slider.carousel.container.children.length - 1) return;
+    this.slider.carousel.container.children[slideIndex].remove();
+    this.thumbnails.carousel.container.children[slideIndex].remove();
+    this.slider.carousel.redraw();
+    this.thumbnails.carousel.redraw();
+    this.slider.carousel.goTo(1);
+    this.thumbnails.carousel.goTo(1);
   }
 
 }
@@ -257,11 +283,15 @@ class Pictures {
   try {
     document.registerElement('as24-pictures', {
       prototype: Object.assign(
-        Object.create( HTMLElement.prototype, {
+        Object.create(HTMLElement.prototype, {
           createdCallback:  { value: elementCreatedHandler },
           attachedCallback: { value: elementAttachedHandler },
           detachedCallback: { value: elementDetachedCallback },
-        })
+        }), {
+          removeSlide(slideIndex) {
+            this.pictures.removeSlide(slideIndex);
+          }
+        }
       )
     });
   } catch (e) {

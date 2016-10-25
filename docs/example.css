@@ -13,8 +13,6 @@ body {
   height: auto;
 }
 
-
-
 /* THE REST, CUSTOM THINGS */
 
 .car-info {
@@ -34,9 +32,9 @@ body {
 }
 
 .gallery-picture {
-  flex: 1;
+  flex: 1 0 auto;
   position: relative;
-  height: 100%;
+  width: 100%;
 }
 
 .gallery-picture__image {

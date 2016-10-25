@@ -42,6 +42,19 @@ function dispatchEvent(evtName, payload, element) {
   return element;
 }
 
+/**
+ * Gets parent el by class name
+ * @param  {string} className
+ * @param  {Element} element
+ * @return {Boolean}
+ */
+function getParentByClassName(className, element) {
+  while (element && !containsClass(className, element)) {
+    element = element.parentNode;
+  }
+  return element;
+}
+
 function merge(src1, src2) {
   var res = {};
   for (var k in src1) {
@@ -101,11 +114,11 @@ var Pictures = function () {
 
       if (!this.thumbnailsItems) return;
       addClass('active', this.thumbnailsItems[0]);
-      [].forEach.call(this.thumbnailsItems, function (el, idx) {
-        el.addEventListener('click', function (e) {
-          e.preventDefault();
-          _this.slider.goTo(idx + 1);
-        });
+
+      this.thumbnails.addEventListener('click', function (evt) {
+        evt.preventDefault();
+        var idx = Array.from(_this.thumbnails.querySelectorAll('.as24-carousel__item')).indexOf(getParentByClassName('as24-carousel__item', evt.target));
+        if (idx >= 0) _this.slider.goTo(idx + 1);
       });
     }
 
@@ -263,10 +276,28 @@ var Pictures = function () {
     value: function removeContainer() {
       var _this4 = this;
 
-      [].forEach.call(this.container.children, function (element) {
-        _this4.container.removeChild(element);
+      Array.from(this.container.children).forEach(function (element) {
+        return _this4.container.removeChild(element);
       });
       this.wrapper.removeChild(this.container);
+    }
+
+    /**
+     * Self-explanatory
+     * @param {number} slideIndex  Self-explanatory
+     * @return {void}
+     */
+
+  }, {
+    key: 'removeSlide',
+    value: function removeSlide(slideIndex) {
+      if (slideIndex > this.slider.carousel.container.children.length - 1) return;
+      this.slider.carousel.container.children[slideIndex].remove();
+      this.thumbnails.carousel.container.children[slideIndex].remove();
+      this.slider.carousel.redraw();
+      this.thumbnails.carousel.redraw();
+      this.slider.carousel.goTo(1);
+      this.thumbnails.carousel.goTo(1);
     }
   }]);
 
@@ -305,7 +336,11 @@ var Pictures = function () {
         createdCallback: { value: elementCreatedHandler },
         attachedCallback: { value: elementAttachedHandler },
         detachedCallback: { value: elementDetachedCallback }
-      }))
+      }), {
+        removeSlide: function removeSlide(slideIndex) {
+          this.pictures.removeSlide(slideIndex);
+        }
+      })
     });
   } catch (e) {
     if (window && window.console) {

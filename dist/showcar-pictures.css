@@ -105,7 +105,6 @@
   .as24-pictures__fullscreen-close {
     -webkit-box-align: center;
         -ms-flex-align: center;
-                -ms-grid-row-align: center;
             align-items: center;
     color: #fff;
     cursor: pointer;
