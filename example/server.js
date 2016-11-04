@@ -2,7 +2,7 @@
 var express = require('express');
 
 // INITIALIZE
-var port  = process.env.PORT || 8080,
+var port  = process.env.PORT || 8081,
     app   = express();
 
 // MIDDLEWARE
