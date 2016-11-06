@@ -1,5 +1,6 @@
 [![npm version](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/showcar-pictures)
-![](http://img.badgesize.io/AutoScout24/showcar-pictures/master/dist/showcar-pictures.min.js?label=js_size)
+![](http://img.badgesize.io/AutoScout24/showcar-pictures/master/dist/showcar-pictures.min.js?label=js_size_gzip&compression=gzip)
+![](http://img.badgesize.io/AutoScout24/showcar-pictures/master/dist/showcar-pictures.min.css?label=css_size_gzip&compression=gzip)
 
 # showcar-pictures
 
