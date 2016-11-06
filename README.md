@@ -1,5 +1,4 @@
 [![npm version](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/showcar-pictures)
-[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg)](https://github.com/AutoScout24/showcar-pictures/releases)
 
 # showcar-pictures
 
