@@ -1,3 +1,5 @@
+[![npm version](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/showcar-pictures)
+
 # showcar-pictures
 
 This module provides a easy to use vanilla js gallery library with previews and full screen view.
