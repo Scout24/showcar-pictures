@@ -99,6 +99,7 @@ class Pictures {
     this.thumbnailsItems = this.thumbnails.querySelectorAll('.as24-carousel__item');
 
     if(!this.thumbnailsItems) return;
+
     addClass('active', this.thumbnailsItems[0]);
 
     this.thumbnails.addEventListener('click', (evt) => {
@@ -133,13 +134,19 @@ class Pictures {
    * Set the full screen state.
    */
   toggleFullScreen() {
+    // Prevent fullscreen mode on small devices
+    if (window.document.body.clientWidth < 1025) return;
+
     this.fullScreenState = !this.fullScreenState;
+
     if(this.fullScreenState) {
       addClass('as24-pictures--fullscreen', this.element);
     } else {
       removeClass('as24-pictures--fullscreen', this.element);
     }
+
     dispatchEvent('as24-pictures.fullscreen', { fullscreen: this.fullScreenState }, this.element);
+
     if (this.thumbnails) this.thumbnails.redraw();
     if (this.slider) this.slider.redraw();
   }
