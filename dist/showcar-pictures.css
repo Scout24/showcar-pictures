@@ -24,12 +24,13 @@
     transition: transform 0.3s;
     transition: transform 0.3s, -webkit-transform 0.3s;
     will-change: transform; }
-  .as24-pictures:hover .as24-pictures__thumbnails {
-    -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0); }
-  .as24-pictures:hover .as24-carousel__indicator {
-    -webkit-transform: translate3d(0, -89px, 0) !important;
-            transform: translate3d(0, -89px, 0) !important; }
+  @media (min-width: 1025px) {
+    .as24-pictures:hover .as24-pictures__thumbnails {
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0); }
+    .as24-pictures:hover .as24-carousel__indicator {
+      -webkit-transform: translate3d(0, -89px, 0) !important;
+              transform: translate3d(0, -89px, 0) !important; } }
   .as24-pictures__header, .as24-pictures__info {
     display: none; }
   .as24-pictures__slider-container {

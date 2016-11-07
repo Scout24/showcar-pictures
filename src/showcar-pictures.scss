@@ -79,12 +79,14 @@ $animation-time: .3s;
 
   &:hover {
 
-    .as24-pictures__thumbnails {
-      transform: translate3d(0, 0, 0);
-    }
+    @media(min-width: 1025px) {
+      .as24-pictures__thumbnails {
+        transform: translate3d(0, 0, 0);
+      }
 
-    .as24-carousel__indicator {
-      transform: translate3d(0, -$thumbs-height, 0) !important;
+      .as24-carousel__indicator {
+        transform: translate3d(0, -$thumbs-height, 0) !important;
+      }
     }
 
   }
