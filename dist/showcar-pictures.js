@@ -137,10 +137,10 @@ var Pictures = function () {
 
         switch (e.detail.role) {
           case 'slider':
-            _this2.thumbnails.goTo(index);
+            _this2.thumbnails.goTo(index, { notify: true });
             break;
           case 'thumbnails':
-            _this2.slider.goTo(index);
+            _this2.slider.goTo(index, { notify: true });
             break;
         }
 
@@ -301,10 +301,10 @@ var Pictures = function () {
       if (slideIndex > this.slider.carousel.container.children.length - 1) return;
       this.slider.carousel.container.children[slideIndex].remove();
       this.thumbnails.carousel.container.children[slideIndex].remove();
-      this.slider.carousel.redraw();
-      this.thumbnails.carousel.redraw();
-      this.slider.carousel.goTo(1);
-      this.thumbnails.carousel.goTo(1);
+      // this.slider.carousel.redraw();
+      // this.thumbnails.carousel.redraw();
+      this.slider.carousel.goTo(1, { notify: false });
+      this.thumbnails.carousel.goTo(1, { notify: false });
     }
   }]);
 
