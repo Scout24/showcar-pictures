@@ -202,7 +202,7 @@ var Pictures = function () {
   }, {
     key: 'attached',
     value: function attached() {
-      this.addContainer();
+      this.container = this.element.querySelector('.as24-pictures__container');
 
       // Slider
       this.slider = this.element.querySelector('[role=slider]');
@@ -249,42 +249,16 @@ var Pictures = function () {
     }
 
     /**
-     * Wraps all the pictures items in a container.
-     */
-
-  }, {
-    key: 'addContainer',
-    value: function addContainer() {
-      var _this3 = this;
-
-      if (containsClass('as24-pictures__wrapper', this.element.children[0])) {
-        this.container = this.element.querySelector('.as24-pictures__container');
-        return;
-      }
-
-      this.container = document.createElement('div');
-      addClass('as24-pictures__container', this.container);
-
-      [].forEach.call(this.element.children, function (element) {
-        var item = element.cloneNode(true);
-        _this3.container.appendChild(item);
-      });
-
-      this.element.innerHTML = '';
-      this.element.appendChild(this.container);
-    }
-
-    /**
      * Removes the container.
      */
 
   }, {
     key: 'removeContainer',
     value: function removeContainer() {
-      var _this4 = this;
+      var _this3 = this;
 
       Array.from(this.container.children).forEach(function (element) {
-        return _this4.container.removeChild(element);
+        return _this3.container.removeChild(element);
       });
       this.wrapper.removeChild(this.container);
     }

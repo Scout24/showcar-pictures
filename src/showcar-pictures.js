@@ -171,7 +171,7 @@ class Pictures {
    * Initializes the pictures by adding all necessary bits and bolts.
    */
   attached() {
-    this.addContainer();
+    this.container = this.element.querySelector('.as24-pictures__container');
 
     // Slider
     this.slider = this.element.querySelector('[role=slider]');
@@ -212,27 +212,6 @@ class Pictures {
     this.element.removeEventListener('click', this.fullScreenCloseListener);
 
     this.removeContainer();
-  }
-
-  /**
-   * Wraps all the pictures items in a container.
-   */
-  addContainer() {
-    if (containsClass('as24-pictures__wrapper', this.element.children[0])){
-      this.container = this.element.querySelector('.as24-pictures__container');
-      return;
-    }
-
-    this.container = document.createElement('div');
-    addClass('as24-pictures__container', this.container);
-
-    [].forEach.call(this.element.children, element => {
-      let item = element.cloneNode(true);
-      this.container.appendChild(item);
-    });
-
-    this.element.innerHTML = '';
-    this.element.appendChild(this.container);
   }
 
   /**
