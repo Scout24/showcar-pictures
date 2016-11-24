@@ -147,8 +147,8 @@ class Pictures {
 
     dispatchEvent('as24-pictures.fullscreen', { fullscreen: this.fullScreenState }, this.element);
 
-    if (this.thumbnails) this.thumbnails.redraw();
-    if (this.slider) this.slider.redraw();
+    if (this.thumbnails) this.thumbnails.redraw(false);
+    if (this.slider) this.slider.redraw(false);
   }
 
   /**
