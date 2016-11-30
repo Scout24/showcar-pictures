@@ -229,12 +229,8 @@ class Pictures {
    */
   removeSlide(slideIndex) {
     if (slideIndex > this.slider.carousel.container.children.length - 1) return;
-    this.slider.carousel.container.children[slideIndex].remove();
-    this.thumbnails.carousel.container.children[slideIndex].remove();
-    // this.slider.carousel.redraw();
-    // this.thumbnails.carousel.redraw();
-    this.slider.carousel.goTo(1, { notify: false });
-    this.thumbnails.carousel.goTo(1, { notify: false });
+    this.slider.removeItem(slideIndex);
+    this.thumbnails.removeItem(slideIndex);
   }
 
 }

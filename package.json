@@ -1,6 +1,6 @@
 {
   "name": "showcar-pictures",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "description": "A simple gallery component that works hand in hand with the showcar-carousel",
   "main": "dist/showcar-pictures.min.js",
   "scripts": {
@@ -54,20 +54,20 @@
   },
   "homepage": "https://github.com/AutoScout24/showcar-pictures#readme",
   "dependencies": {
-    "showcar-carousel": "^4.1.10"
+    "showcar-carousel": "^4.1.11"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.3",
     "babel-cli": "^6.18.0",
     "babel-preset-es2015": "^6.18.0",
     "clean-css": "^3.4.21",
-    "ejs": "^2.5.2",
+    "ejs": "^2.5.3",
     "express": "^4.14.0",
     "livereload": "^0.6.0",
     "node-sass": "^3.13.0",
     "postcss-cli": "^2.6.0",
     "rimraf": "^2.5.4",
     "showcar-ui": "git+https://gitlab.com/web-experience/showcar-ui.git",
-    "uglify-js": "^2.7.4"
+    "uglify-js": "^2.7.5"
   }
 }
