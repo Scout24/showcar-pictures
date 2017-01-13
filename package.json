@@ -54,7 +54,7 @@
   },
   "homepage": "https://github.com/AutoScout24/showcar-pictures#readme",
   "dependencies": {
-    "showcar-carousel": "^4.1.13"
+    "showcar-carousel": "^4.1.15"
   },
   "devDependencies": {
     "autoprefixer": "^6.6.1",
@@ -64,7 +64,7 @@
     "ejs": "^2.5.5",
     "express": "^4.14.0",
     "livereload": "^0.6.0",
-    "node-sass": "^4.2.0",
+    "node-sass": "^4.3.0",
     "postcss-cli": "^2.6.0",
     "rimraf": "^2.5.4",
     "showcar-ui": "git+https://gitlab.com/web-experience/showcar-ui.git",
