@@ -135,7 +135,7 @@ class Pictures {
    */
   toggleFullScreen() {
     // Prevent fullscreen mode on small devices
-    if (window.document.body.clientWidth < 1025) return;
+    if (window.document.body.clientWidth < 1024) return;
 
     this.fullScreenState = !this.fullScreenState;
 
