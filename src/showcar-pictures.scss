@@ -1,6 +1,5 @@
-@import 'npm:showcar-ui/src/scss/mixins/fonts.scss';
-@import 'npm:showcar-ui/src/scss/mixins/utils.scss';
-@import 'npm:showcar-ui/src/scss/variables.scss';
+@import 'npm:showcar-ui/src/01-settings/variables.scss';
+@import 'npm:showcar-ui/src/legacy-mixins.scss';
 
 $component-bg-color: rgba(0, 0, 0, .95);
 $controlls-bg-color: rgba(0, 0, 0, .4);
