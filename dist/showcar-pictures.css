@@ -411,7 +411,8 @@ a,
     cursor: pointer;
     margin: 12px 0 0 30px;
     padding: 1px 0 0 35px;
-    position: relative; }
+    position: absolute;
+    right: 30px; }
     .as24-pictures__fullscreen-close:after, .as24-pictures__fullscreen-close:before {
       border-top: solid 2px #fff;
       content: '';

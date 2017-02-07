@@ -175,7 +175,8 @@ $animation-time: .3s;
     cursor: pointer;
     margin: 12px 0 0 30px;
     padding: 1px 0 0 35px;
-    position: relative;
+    position: absolute;
+    right: 30px;
   }
 
   @at-root &--fullscreen {
