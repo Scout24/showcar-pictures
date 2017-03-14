@@ -67,7 +67,7 @@
     "node-sass": "^4.3.0",
     "postcss-cli": "^2.6.0",
     "rimraf": "^2.5.4",
-    "showcar-ui": "git+https://gitlab.com/web-experience/showcar-ui.git",
+    "showcar-ui": "git@github.com:AutoScout24/showcar-ui.git",
     "uglify-js": "^2.7.5"
   }
 }
