@@ -177,6 +177,7 @@ $animation-time: .3s;
     padding: 1px 0 0 35px;
     position: absolute;
     right: 30px;
+    z-index:1;
   }
 
   @at-root &--fullscreen {

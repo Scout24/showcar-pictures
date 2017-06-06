@@ -54,20 +54,20 @@
   },
   "homepage": "https://github.com/AutoScout24/showcar-pictures#readme",
   "dependencies": {
-    "showcar-carousel": "^4.1.15"
+    "showcar-carousel": "^4.3.4"
   },
   "devDependencies": {
-    "autoprefixer": "^6.6.1",
-    "babel-cli": "^6.18.0",
-    "babel-preset-es2015": "^6.18.0",
-    "clean-css": "^3.4.23",
-    "ejs": "^2.5.5",
-    "express": "^4.14.0",
-    "livereload": "^0.6.0",
-    "node-sass": "^4.3.0",
+    "autoprefixer": "^6.7.7",
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "clean-css": "^3.4.26",
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "livereload": "^0.6.2",
+    "node-sass": "^4.5.3",
     "postcss-cli": "^2.6.0",
-    "rimraf": "^2.5.4",
-    "showcar-ui": "git@github.com:AutoScout24/showcar-ui.git",
-    "uglify-js": "^2.7.5"
+    "rimraf": "^2.6.1",
+    "showcar-ui": "git+ssh://git@github.com/AutoScout24/showcar-ui.git",
+    "uglify-js": "^2.8.28"
   }
 }
