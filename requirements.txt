@@ -1,0 +1,1 @@
+- Do not show thumbnails for media slides (e.g. youtube video, 360 images, etc.)
