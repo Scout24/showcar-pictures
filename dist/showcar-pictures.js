@@ -193,6 +193,10 @@ var Pictures = function () {
       if (this.fullScreenState && containsClass('as24-pictures__fullscreen-close', event.target)) {
         this.toggleFullScreen();
       }
+
+      if (this.fullScreenState && event.keyCode === 27) {
+        this.toggleFullScreen();
+      }
     }
 
     /**
@@ -202,7 +206,12 @@ var Pictures = function () {
   }, {
     key: 'attached',
     value: function attached() {
+      var _this3 = this;
+
       this.container = this.element.querySelector('.as24-pictures__container');
+      document.addEventListener('keydown', function (e) {
+        return _this3.fullScreenCloseHandler(e);
+      });
 
       // Slider
       this.slider = this.element.querySelector('[role=slider]');
@@ -255,10 +264,10 @@ var Pictures = function () {
   }, {
     key: 'removeContainer',
     value: function removeContainer() {
-      var _this3 = this;
+      var _this4 = this;
 
       Array.from(this.container.children).forEach(function (element) {
-        return _this3.container.removeChild(element);
+        return _this4.container.removeChild(element);
       });
       this.wrapper.removeChild(this.container);
     }

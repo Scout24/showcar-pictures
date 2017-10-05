@@ -165,6 +165,10 @@ class Pictures {
     if(this.fullScreenState && containsClass('as24-pictures__fullscreen-close', event.target)) {
       this.toggleFullScreen();
     }
+
+    if(this.fullScreenState && event.keyCode === 27) {
+      this.toggleFullScreen();
+    }
   }
 
   /**
@@ -172,6 +176,7 @@ class Pictures {
    */
   attached() {
     this.container = this.element.querySelector('.as24-pictures__container');
+    document.addEventListener('keydown', e => this.fullScreenCloseHandler(e));
 
     // Slider
     this.slider = this.element.querySelector('[role=slider]');
