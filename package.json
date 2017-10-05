@@ -65,9 +65,10 @@
     "express": "^4.15.3",
     "livereload": "^0.6.2",
     "node-sass": "^4.5.3",
+    "nodemon": "^1.12.1",
     "postcss-cli": "^2.6.0",
     "rimraf": "^2.6.1",
-    "showcar-ui": "git@github.com:AutoScout24/showcar-ui.git",
+    "showcar-ui": "^3.7.2",
     "uglify-js": "^2.8.28"
   }
 }
