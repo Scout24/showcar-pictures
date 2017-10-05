@@ -90,6 +90,9 @@ var Pictures = function () {
      */
     this.fullScreenState = false;
 
+    this.leftArrow = this.element.querySelector('.as24-carousel__button[data-direction=left]');
+    this.rightArrow = this.element.querySelector('.as24-carousel__button[data-direction=right]');
+
     this.element.addEventListener('as24-carousel.slide', function (e) {
       var data = void 0;
       e.stopPropagation();
@@ -193,9 +196,18 @@ var Pictures = function () {
       if (this.fullScreenState && containsClass('as24-pictures__fullscreen-close', event.target)) {
         this.toggleFullScreen();
       }
-
-      if (this.fullScreenState && event.keyCode === 27) {
-        this.toggleFullScreen();
+    }
+  }, {
+    key: 'fullScreenKeyboardHandler',
+    value: function fullScreenKeyboardHandler(event) {
+      if (this.fullScreenState) {
+        if (event.keyCode === 27) {
+          this.toggleFullScreen();
+        } else if (event.keyCode === 37 && this.leftArrow) {
+          this.leftArrow.click();
+        } else if (event.keyCode === 39 && this.rightArrow) {
+          this.rightArrow.click();
+        }
       }
     }
 
@@ -210,7 +222,7 @@ var Pictures = function () {
 
       this.container = this.element.querySelector('.as24-pictures__container');
       document.addEventListener('keydown', function (e) {
-        return _this3.fullScreenCloseHandler(e);
+        return _this3.fullScreenKeyboardHandler(e);
       });
 
       // Slider
