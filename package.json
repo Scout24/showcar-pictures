@@ -9,7 +9,7 @@
     "prebuild": "npm run build:clean",
     "build:js": "npm run build:babel && npm run build:uglify",
     "build:babel": "mkdir dist && babel $npm_package_config_src.js -o $npm_package_config_dist.js -s",
-    "build:uglify": "uglifyjs $npm_package_config_dist.js --o $npm_package_config_dist.min.js --source-map dist/showcar-pictures.min.js.map -p 5 -c -m --mangle-props --mangle-regex='/^_/'",
+    "build:uglify": "uglifyjs $npm_package_config_dist.js --o $npm_package_config_dist.min.js --source-map dist/showcar-pictures.min.js.map -p 5 -c -m --mangle-props",
     "build:css": "npm run build:sass && npm run build:autoprefixer && npm run build:cleancss",
     "build:sass": "node-sass ./src/ -o ./dist/ --importer ./importer.sass.js",
     "build:autoprefixer": "node ./node_modules/postcss-cli/bin/postcss --use autoprefixer $npm_package_config_dist.css -d dist/",
