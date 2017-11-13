@@ -271,8 +271,10 @@ class Pictures {
    * Handler for detachment of the element from the dom.
    */
   let elementDetachedCallback = function() {
-    this.carousel.detached();
-    delete this.carousel;
+    if (this.carousel) {
+      this.carousel.detached();
+      delete this.carousel;
+    }
   };
 
   /**

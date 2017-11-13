@@ -321,8 +321,10 @@ var Pictures = function () {
    * Handler for detachment of the element from the dom.
    */
   var elementDetachedCallback = function elementDetachedCallback() {
-    this.carousel.detached();
-    delete this.carousel;
+    if (this.carousel) {
+      this.carousel.detached();
+      delete this.carousel;
+    }
   };
 
   /**
