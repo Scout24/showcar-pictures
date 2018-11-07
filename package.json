@@ -12,7 +12,7 @@
     "build:uglify": "uglifyjs $npm_package_config_dist.js --o $npm_package_config_dist.min.js --source-map dist/showcar-pictures.min.js.map -p 5 -c -m",
     "build:css": "npm run build:sass && npm run build:autoprefixer && npm run build:cleancss",
     "build:sass": "node-sass ./src/ -o ./dist/ --importer ./importer.sass.js",
-    "build:autoprefixer": "node ./node_modules/postcss-cli/bin/postcss --use autoprefixer $npm_package_config_dist.css -d dist/",
+    "build:autoprefixer": "node ./node_modules/postcss-cli/bin/postcss $npm_package_config_dist.css -d dist/ --use autoprefixer",
     "build:cleancss": "cleancss --source-map -o $npm_package_config_dist.min.css $npm_package_config_dist.css",
     "build": "npm run build:js && npm run build:css",
     "build:clean": "rimraf dist",
@@ -54,21 +54,21 @@
   },
   "homepage": "https://github.com/AutoScout24/showcar-pictures#readme",
   "dependencies": {
-    "showcar-carousel": "^4.3.4"
+    "showcar-carousel": "^4.4.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.7",
-    "babel-cli": "^6.24.1",
+    "babel-cli": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
-    "clean-css": "^3.4.26",
-    "ejs": "^2.5.6",
-    "express": "^4.15.3",
-    "livereload": "^0.6.2",
-    "node-sass": "^4.5.3",
-    "nodemon": "^1.12.1",
-    "postcss-cli": "^2.6.0",
-    "rimraf": "^2.6.1",
-    "showcar-ui": "^3.7.2",
-    "uglify-js": "^2.8.28"
+    "clean-css": "^3.4.28",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "livereload": "^0.6.3",
+    "node-sass": "^4.10.0",
+    "nodemon": "^1.18.6",
+    "postcss-cli": "6.0.1",
+    "rimraf": "^2.6.2",
+    "showcar-ui": "^3.8.2",
+    "uglify-js": "^2.8.29"
   }
 }

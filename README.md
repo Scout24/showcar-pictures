@@ -1,18 +1,18 @@
 [![npm version](https://img.shields.io/npm/v/showcar-pictures.svg)](https://www.npmjs.com/package/showcar-pictures)
-![](http://img.badgesize.io/AutoScout24/showcar-pictures/master/dist/showcar-pictures.min.js?label=js_size_gzip&compression=gzip)
-![](http://img.badgesize.io/AutoScout24/showcar-pictures/master/dist/showcar-pictures.min.css?label=css_size_gzip&compression=gzip)
+![](http://img.badgesize.io/Scout24/showcar-pictures/master/dist/showcar-pictures.min.js?label=js_size_gzip&compression=gzip)
+![](http://img.badgesize.io/Scout24/showcar-pictures/master/dist/showcar-pictures.min.css?label=css_size_gzip&compression=gzip)
 
 # showcar-pictures
 
 This module provides a easy to use vanilla js gallery library with previews and full screen view.
-Actually it is just a wrapper that handles the communication between two [showcar-carousel](https://github.com/AutoScout24/showcar-carousel) components.
+Actually it is just a wrapper that handles the communication between two [showcar-carousel](https://github.com/Scout24/showcar-carousel) components.
 
 ***
 
 ## Usage
 
 #####Live example:
-Visit the [example](https://autoscout24.github.io/showcar-pictures/) on github pages.
+Visit the [example](https://scout24.github.io/showcar-pictures/) on github pages.
 
 
 #####Local example:
