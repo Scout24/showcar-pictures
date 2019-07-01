@@ -7,13 +7,12 @@
 This module provides a easy to use vanilla js gallery library with previews and full screen view.
 Actually it is just a wrapper that handles the communication between two [showcar-carousel](https://github.com/Scout24/showcar-carousel) components.
 
-***
+---
 
 ## Usage
 
 #####Live example:
 Visit the [example](https://scout24.github.io/showcar-pictures/) on github pages.
-
 
 #####Local example:
 Just run the following command in the root of the carousel library.
@@ -21,6 +20,7 @@ Just run the following command in the root of the carousel library.
 ```
 $> npm start
 ```
+
 This will open a small express server on your local machine where you can see the running example.
 
 Visit: [http://localhost:8080](http://localhost:8080)
@@ -33,7 +33,6 @@ See the following example below:
 <div id="my-pics">
   <as24-pictures class="as24-pictures">
     <div class="as24-pictures__container">
-
       <!-- Header -->
       <div class="as24-pictures__header">
         <div class="as24-pictures__header-line">
@@ -48,7 +47,6 @@ See the following example below:
 
       <div class="as24-pictures__content">
         <div class="as24-pictures__slider-container">
-
           <!-- Slider -->
           <as24-carousel class="as24-pictures__slider" role="slider" loop="infinite">
             <div class="as24-carousel__container" role="container">
@@ -69,11 +67,15 @@ See the following example below:
                 <!-- the content of a thumb item -->
               </div>
             </div>
-            <a href="#" class="as24-carousel__button as24-carousel__button--hidden" role="nav-button" data-direction="left"></a>
+            <a
+              href="#"
+              class="as24-carousel__button as24-carousel__button--hidden"
+              role="nav-button"
+              data-direction="left"
+            ></a>
             <a href="#" class="as24-carousel__button" role="nav-button" data-direction="right"></a>
           </as24-carousel>
           <!-- / Thumbnails -->
-
         </div>
 
         <!-- Additional info -->
@@ -81,13 +83,13 @@ See the following example below:
           <!-- description, ads, whatever -->
         </aside>
         <!-- / Additional info -->
-
       </div>
     </div>
   </as24-pictures>
 </div>
 ```
-*Note: The number of the thumbnails and the number of slides MUST be the same!*
+
+_Note: The number of the thumbnails and the number of slides MUST be the same!_
 
 #### CSS Styling
 
@@ -108,25 +110,25 @@ As to styles, you only have to specify these:
 
 The library triggers following custom events with `event.detail`:
 
- * `as24-pictures.fullscreen` - when fullscreen mode is toggled
+- `as24-pictures.fullscreen` - when fullscreen mode is toggled
 
-   ```js
-   {
-     fullscreen: true
-   }
-   ```
+  ```js
+  {
+    fullscreen: true;
+  }
+  ```
 
- * `as24-pictures.slide` - when the image of the slider has been changed
+- `as24-pictures.slide` - when the image of the slider has been changed
 
-   ```js
-   {
-     direction: "right",
-     fullscreen: true,
-     id: "",
-     index: 6,
-     role: "slider"
-   }
-   ```
+  ```js
+  {
+    direction: "right",
+    fullscreen: true,
+    id: "",
+    index: 6,
+    role: "slider"
+  }
+  ```
 
 ## Installation
 
@@ -141,37 +143,37 @@ $> npm install showcar-pictures --save
 Afterwards you need to add some css and js to your page.
 
 ```html
-<link rel="stylesheet" href="../dist/showcar-pictures.css">
+<link rel="stylesheet" href="../dist/showcar-pictures.css" />
 ```
 
 ```html
 <script src="../dist/showcar-carousel.js"></script>
 ```
 
-*Note: The showcar-pictures depends on the [showcar-carousel](https://github.com/AutoScout24/showcar-carousel) component.*
+_Note: The showcar-pictures depends on the [showcar-carousel](https://github.com/AutoScout24/showcar-carousel) component._
 
-***
+---
 
 ## Contributing
 
 #### How to contribute:
 
-* Fork this repository.      
-* Then install the required dependencies.
-    ```
-    $> npm install
-    ```  
-* Start the dev server.
-    ```
-    $> npm run dev
-    ```
-* Visit [http://localhost:8080](http://localhost:8080)
+- Fork this repository.
+- Then install the required dependencies.
+  ```
+  $> npm install
+  ```
+- Start the dev server.
+  ```
+  $> npm run dev
+  ```
+- Visit [http://localhost:8080](http://localhost:8080)
 
-*Note: changes will automatically build and refresh the browser.*
+_Note: changes will automatically build and refresh the browser._
 
 ##### Contribute
 
-Save your changes and run `$> npm prod`.
+Save your changes and run `$> npm run prod`.
 
 Commit your code _and_ the compiled libraries in _./dist_. Then create a pull-request.
 
