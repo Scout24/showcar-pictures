@@ -9,7 +9,7 @@ $thumbs-height: (($thumb-width * 75) / 100) + 14;
 
 $title-text-colour: #fff;
 
-$active-thumb-border: #ff7500;
+$active-thumb-border: $orange-100;
 
 $fullscreen-container-padding: $XXL;
 $headeing-margin: $XL;
@@ -38,6 +38,22 @@ $animation-time: .3s;
   &:after {
     transform: translateY(10px) rotate(135deg);
   }
+}
+
+.coral .as24-pictures .active::after {
+  border: 2px solid #f90038;
+}
+
+.yellow .as24-pictures .active::after {
+  border: 2px solid #1A72E8;
+}
+
+.google-blue .as24-pictures .active::after {
+  border: 2px solid #1A72E8;
+}
+
+.jeans-blue .as24-pictures .active::after {
+  border: 2px solid #1E7BAA;
 }
 
 .as24-pictures {
@@ -138,7 +154,6 @@ $animation-time: .3s;
           top: -2px;
         }
       }
-
     }
 
     .as24-carousel__button {
